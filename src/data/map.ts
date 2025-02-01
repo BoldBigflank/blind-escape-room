@@ -24,7 +24,7 @@ export const map = {
     "rooms": [
         {
             "name": "lobby",
-            "intro": "You have arrived.",
+            "intro": "You have arrived. Use the arrow keys to look around. Use space bar to interact.",
             "description": "This is the lobby.",
             "views": [
                 {

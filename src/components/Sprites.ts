@@ -15,7 +15,7 @@ const RoomSprite = () => Sprite({
         this.advance(dt)
     },
     render() {
-        if (!this.gameModel) return
+        if (!this.gameModel || this.width === undefined || this.height === undefined) return
         // Hide rooms that haven't been entered yet
         if (!this.gameModel.visitedRooms.includes(this.name)) return
         this.draw()
@@ -88,8 +88,6 @@ export const MapSprite = (gameModel: GameModel) => {
                     }
                 }
                 traverseRoom(gameModel.map.rooms[0], 0, 0)
-                gameModel.map.rooms.forEach((room, i) => {
-                })
             
                 // Inspect
                 onKey(['w', 'arrowup'], () => {
