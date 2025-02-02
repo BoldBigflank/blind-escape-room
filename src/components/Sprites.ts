@@ -68,7 +68,8 @@ export const MapSprite = (gameModel: GameModel) => {
                         this.addChild(r)
     
                         currentRoom.views.forEach((v) => {
-                            if (v.connectsTo !== null) {
+                            if (v.action !== undefined) {
+                                const [_action, connectsTo] = v.action.split('_')
                                 let newX = x, newY = y
                                 if (v.direction === 'n'){
                                     newY -= (ROOM_SIZE + ROOM_PADDING)
@@ -82,7 +83,7 @@ export const MapSprite = (gameModel: GameModel) => {
                                 if (v.direction === 'e') {
                                     newX += (ROOM_SIZE + ROOM_PADDING)
                                 }
-                                traverseRoom(gameModel.roomByName(v.connectsTo), newX, newY)
+                                traverseRoom(gameModel.roomByName(connectsTo), newX, newY)
                             }
                         })
                     }

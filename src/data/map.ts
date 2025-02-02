@@ -2,7 +2,7 @@ export type CompassDirection = "n"|"s"|"e"|"w"
 
 export type View = {
     direction: CompassDirection
-    connectsTo: string | null
+    action: string | undefined
     description: string
 }
 
@@ -29,22 +29,19 @@ export const map = {
             "views": [
                 {
                     "direction": "n",
-                    "connectsTo": "kitchen",
-                    "description": "A door to the kitchen."
+                    "description": "A door to the kitchen.",
+                    "action": "moveTo_kitchen"
                 },
                 {
                     "direction": "e",
-                    "connectsTo": null,
                     "description": "A flower with a delightful scent on a table."
                 },
                 {
                     "direction": "s",
-                    "connectsTo": null,
                     "description": "A locked door to the outside."
                 },
                 {
                     "direction": "w",
-                    "connectsTo": null,
                     "description": "A mirror, which isn't too helpful."
                 }
             ]
@@ -56,22 +53,19 @@ export const map = {
             "views": [
                 {
                     "direction": "n",
-                    "connectsTo": null,
                     "description": "Some pots and pans on a counter."
                 },
                 {
                     "direction": "e",
-                    "connectsTo": null,
                     "description": "A gas stove."
                 },
                 {
                     "direction": "s",
-                    "connectsTo": "lobby",
+                    "action": "moveTo_lobby",
                     "description": "There is a door to the lobby."
                 },
                 {
                     "direction": "w",
-                    "connectsTo": null,
                     "description": "A large sink."
                 }
             ]

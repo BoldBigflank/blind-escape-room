@@ -35,3 +35,4 @@
     - Three buttons (assign to 1, 2, 3), which start playing ascending notes at different speeds. Hit the buttons at the correct time to hit the top note simultaneously. Or perhaps instead of different speeds, the three together play a scale when started at the right times.
     - Red light/green light - choose to move until the an audible drone moves onto you. Failing moves you back.
     - Maze/chase area - Follow a tone (louder forward)
+    - Three/four identical buttons that need to be pressed in order. The button hums when it's its turn

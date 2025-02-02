@@ -43,7 +43,6 @@ export class GameModel {
     }
 
     inspect() {
-        console.log('starting')
         if (this.facing === "") 
             say(this.currentRoom?.description)
         else
@@ -57,9 +56,20 @@ export class GameModel {
         }
         switch (index) {
             case 0:
-                if (this.currentView?.connectsTo) {
-                    this.moveTo(this.currentView.connectsTo)
+                if (this.currentView?.action) {
+                    this.action(this.currentView.action)
                 }
+                break
+            default:
+                break
+        }
+    }
+
+    action(command: string) {
+        const [action, param] = command.split('_')
+        switch (action) {
+            case 'moveTo':
+                this.moveTo(param)
                 break
             default:
                 break
