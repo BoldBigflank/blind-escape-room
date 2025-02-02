@@ -68,22 +68,26 @@ export const MapSprite = (gameModel: GameModel) => {
                         this.addChild(r)
     
                         currentRoom.views.forEach((v) => {
-                            if (v.action !== undefined) {
-                                const [_action, connectsTo] = v.action.split('_')
-                                let newX = x, newY = y
-                                if (v.direction === 'n'){
-                                    newY -= (ROOM_SIZE + ROOM_PADDING)
-                                }
-                                if (v.direction === 's') {
-                                    newY += (ROOM_SIZE + ROOM_PADDING)
-                                }
-                                if (v.direction === 'w') {
-                                    newX -= (ROOM_SIZE + ROOM_PADDING)
-                                }
-                                if (v.direction === 'e') {
-                                    newX += (ROOM_SIZE + ROOM_PADDING)
-                                }
-                                traverseRoom(gameModel.roomByName(connectsTo), newX, newY)
+                            if (v.interaction !== undefined) {
+                                v.interaction.forEach((i) => {
+                                    if (!i.action) return
+                                    const [action, connectsTo] = i.action?.split('_')
+                                    if (action != "moveTo") return
+                                    let newX = x, newY = y
+                                    if (v.direction === 'n'){
+                                        newY -= (ROOM_SIZE + ROOM_PADDING)
+                                    }
+                                    if (v.direction === 's') {
+                                        newY += (ROOM_SIZE + ROOM_PADDING)
+                                    }
+                                    if (v.direction === 'w') {
+                                        newX -= (ROOM_SIZE + ROOM_PADDING)
+                                    }
+                                    if (v.direction === 'e') {
+                                        newX += (ROOM_SIZE + ROOM_PADDING)
+                                    }
+                                    traverseRoom(gameModel.roomByName(connectsTo), newX, newY)
+                                })
                             }
                         })
                     }
