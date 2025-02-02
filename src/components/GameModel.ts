@@ -46,9 +46,9 @@ export class GameModel {
 
     inspect() {
         if (this.facing === "") 
-            say(this.currentRoom?.description)
+            say(this.currentRoom?.description, true)
         else
-            say(this.currentView?.description)
+            say(this.currentView?.description, true)
     }
 
     interact(index: number) {
@@ -74,11 +74,11 @@ export class GameModel {
                 // Move past failed conditions
                 if (!this.state[option.condition]) continue
             }
-            if (option.action) {
-                this.action(option.action)
-            }
             if (option.message) {
                 say(option.message)
+            }
+            if (option.action) {
+                this.action(option.action)
             }
 
             return

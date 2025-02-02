@@ -1,6 +1,6 @@
-export const say = (text: string | undefined) => {
+export const say = (text: string | undefined, interrupting?: boolean) => {
     var msg = new SpeechSynthesisUtterance();
     msg.text = text || "hello world";
-    window.speechSynthesis.cancel();
+    if (interrupting) window.speechSynthesis.cancel();
     window.speechSynthesis.speak(msg);
 }
