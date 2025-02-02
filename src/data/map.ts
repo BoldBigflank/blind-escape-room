@@ -1,8 +1,14 @@
 export type CompassDirection = "n"|"s"|"e"|"w"
 
+export type Interaction = {
+    condition?: string
+    message?: string
+    action?: string
+}
+
 export type View = {
     direction: CompassDirection
-    action: string | undefined
+    interaction: Interaction[]
     description: string
 }
 
@@ -30,11 +36,24 @@ export const map = {
                 {
                     "direction": "n",
                     "description": "A door to the kitchen.",
-                    "action": "moveTo_kitchen"
+                    "interaction": [{
+                        "condition": "kitchenDoor",
+                        "message": "You walk through the open door.",
+                        "action": "moveTo_kitchen"
+                    },{
+                        "message": "It's locked!"
+                    }]
                 },
                 {
                     "direction": "e",
-                    "description": "A flower with a delightful scent on a table."
+                    "description": "A flower with a delightful scent on a table.",
+                    "interaction": [{
+                        "condition": "kitchenDoor",
+                        "message": "The button is pressed. What door opened?"
+                    },{
+                        "message": "You find a hidden button and press it. A door opens.",
+                        "action":"activate_kitchenDoor"
+                    }]
                 },
                 {
                     "direction": "s",
@@ -61,7 +80,9 @@ export const map = {
                 },
                 {
                     "direction": "s",
-                    "action": "moveTo_lobby",
+                    "interaction": [{
+                        "action": "moveTo_lobby",
+                    }],
                     "description": "There is a door to the lobby."
                 },
                 {

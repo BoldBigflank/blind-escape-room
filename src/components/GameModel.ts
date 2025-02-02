@@ -1,4 +1,4 @@
-import { map, Map, Room, View, CompassDirection } from '../data/map.ts'
+import { map, Map, Room, View, Interaction, CompassDirection } from '../data/map.ts'
 import { say } from '../data/utils.ts'
 
 export class GameModel {
@@ -6,11 +6,13 @@ export class GameModel {
     position: string | undefined
     facing: CompassDirection | ""
     visitedRooms: string[]
+    state: Record<string,any>
 
     constructor() {
         this.map = map
         this.facing = ""
         this.visitedRooms = []
+        this.state = {}
         this.moveTo(this.map.rooms[0].name)
     }
 
@@ -55,13 +57,31 @@ export class GameModel {
             return
         }
         switch (index) {
-            case 0:
-                if (this.currentView?.action) {
-                    this.action(this.currentView.action)
+            case 0: // Space bar
+                if (this.currentView?.interaction) {
+                    this.interaction(this.currentView.interaction)
                 }
                 break
             default:
                 break
+        }
+    }
+
+    interaction(options: Interaction[]) {
+        for(let i = 0; i < options.length; i++) {
+            const option = options[i]
+            if (option.condition) {
+                // Move past failed conditions
+                if (!this.state[option.condition]) continue
+            }
+            if (option.action) {
+                this.action(option.action)
+            }
+            if (option.message) {
+                say(option.message)
+            }
+
+            return
         }
     }
 
@@ -70,6 +90,12 @@ export class GameModel {
         switch (action) {
             case 'moveTo':
                 this.moveTo(param)
+                break
+            case 'activate':
+                this.state[param] = true
+                break
+            case 'toggle':
+                this.state[param] = !this.state[param]
                 break
             default:
                 break
