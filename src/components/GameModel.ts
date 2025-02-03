@@ -1,4 +1,5 @@
 import { map, Map, Room, View, Interaction, CompassDirection } from '../data/map.ts'
+import { Blip } from '../data/sfx.ts'
 import { say } from '../data/utils.ts'
 
 export class GameModel {
@@ -59,6 +60,8 @@ export class GameModel {
         switch (index) {
             case 0: // Space bar
                 if (this.currentView?.interaction) {
+                    
+                    
                     this.interaction(this.currentView.interaction)
                 }
                 break
@@ -78,6 +81,7 @@ export class GameModel {
                 say(option.message)
             }
             if (option.action) {
+                Blip()
                 this.action(option.action)
             }
 

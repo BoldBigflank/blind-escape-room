@@ -1,4 +1,4 @@
-import { onKey, Sprite } from 'kontra'
+import { getCanvas, onKey, Sprite } from 'kontra'
 import { GameModel } from './GameModel'
 import { CompassDirection, Room } from '../data/map'
 
@@ -40,9 +40,10 @@ const RoomSprite = () => Sprite({
 })
 
 export const MapSprite = (gameModel: GameModel) => {
+    const c = getCanvas()
     return Sprite({
-        x: 100,
-        y: 200,
+        x: c.width / 2,
+        y: c.height / 2,
         color: 'red',
         width: 128,
         height: 128,
