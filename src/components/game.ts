@@ -1,7 +1,6 @@
 import { init, Sprite, GameLoop, initGamepad, initKeys } from 'kontra'
 import { MapSprite } from './Sprites';
 import { GameModel } from './GameModel';
-import { RedLightSprite } from '../sprites/RedLightGreenLight';
 
 export const initGame = () => {
   initGamepad();
@@ -12,13 +11,8 @@ export const initGame = () => {
   init()
   
   const sprites: Sprite[] = []
-  const addPuzzleToSprites = (puzzle: Sprite) => {
-    puzzle.hidden = true
-    sprites.push(puzzle)
-  }
 
   sprites.push(MapSprite(gameModel)) // View
-  // addPuzzleToSprites(RedLightSprite())
   
   let loop = GameLoop({
     update: function(dt) {

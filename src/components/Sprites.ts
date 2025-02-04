@@ -131,7 +131,7 @@ export const MapSprite = (gameModel: GameModel) => {
                 })
                 this.initialized = true
             }
-            this.currentPuzzle = this.puzzles.find((p) => p.name === gameModel.currentPuzzle)
+            this.currentPuzzle = this.puzzles.find((p:Sprite) => p.name === gameModel.currentPuzzle)
             this.advance(dt)
             if (this.currentPuzzle) this.currentPuzzle.update(dt)
         },

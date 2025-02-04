@@ -21,7 +21,7 @@ export const RedLightSprite = () => {
             }
             this.color = this.props.state
             if (keyPressed(['space'])) {
-                this.props.progress += dt * 10
+                this.props.progress += dt! * 10
                 if (this.props.progress >= 10) {
                     emit('activate', 'redLight')
                     this.solved = true
@@ -36,7 +36,7 @@ export const RedLightSprite = () => {
             if (!ctx) return
             ctx.save()
             ctx.fillStyle = "white"
-            ctx.fillRect(10, this.height - this.props.progress - 10, this.width - 20, this.props.progress)
+            ctx.fillRect(10, this.height! - this.props.progress - 10, this.width! - 20, this.props.progress)
             ctx.restore()
         }
     })
