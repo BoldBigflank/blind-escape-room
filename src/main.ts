@@ -16,7 +16,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <button id="playButton">Play</button>
       </div>
     </div>
-    <div class="card">
+    <div class="card" role="application">
       <canvas id="renderCanvas" style="display:none;" width=640 height=480></canvas>
     </div>
   </div>

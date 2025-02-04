@@ -24,4 +24,5 @@ export const initGame = () => {
   });
   
   loop.start();
+  document.getElementById('renderCanvas')?.focus()
 }
