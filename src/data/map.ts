@@ -10,6 +10,7 @@ export type View = {
     direction: CompassDirection
     interaction: Interaction[]
     description: string
+    puzzle?: string
 }
 
 export type Room = {
@@ -76,7 +77,8 @@ export const map = {
                 },
                 {
                     "direction": "e",
-                    "description": "A gas stove."
+                    "description": "A gas stove.",
+                    "puzzle": "redLight"
                 },
                 {
                     "direction": "s",

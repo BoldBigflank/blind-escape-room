@@ -1,6 +1,7 @@
 import { init, Sprite, GameLoop, initGamepad, initKeys } from 'kontra'
 import { MapSprite } from './Sprites';
 import { GameModel } from './GameModel';
+import { RedLightSprite } from '../sprites/RedLightGreenLight';
 
 export const initGame = () => {
   initGamepad();
@@ -11,16 +12,22 @@ export const initGame = () => {
   init()
   
   const sprites: Sprite[] = []
-    sprites.push(MapSprite(gameModel)) // View
-    
-    let loop = GameLoop({
-      update: function() {
-        sprites.forEach((s) => s.update())
-      },
-      render: function() {
-        sprites.forEach((s) => s.render())
-      }
-    });
-    
-    loop.start();
+  const addPuzzleToSprites = (puzzle: Sprite) => {
+    puzzle.hidden = true
+    sprites.push(puzzle)
+  }
+
+  sprites.push(MapSprite(gameModel)) // View
+  // addPuzzleToSprites(RedLightSprite())
+  
+  let loop = GameLoop({
+    update: function(dt) {
+      sprites.forEach((s) => s.update(dt))
+    },
+    render: function() {
+      sprites.forEach((s) => s.render())
+    }
+  });
+  
+  loop.start();
 }

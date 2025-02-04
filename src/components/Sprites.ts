@@ -1,6 +1,7 @@
 import { getCanvas, onKey, Sprite } from 'kontra'
 import { GameModel } from './GameModel'
 import { CompassDirection, Room } from '../data/map'
+import { RedLightSprite } from '../sprites/RedLightGreenLight'
 
 const ROOM_SIZE = 48
 const ROOM_PADDING = 8
@@ -48,6 +49,9 @@ export const MapSprite = (gameModel: GameModel) => {
         width: 128,
         height: 128,
         anchor: {x: 0.5, y: 0.5},
+        puzzles: [
+            RedLightSprite()
+        ],
         lookInput(direction: CompassDirection){
             gameModel.lookAt(direction)
         },
@@ -125,12 +129,21 @@ export const MapSprite = (gameModel: GameModel) => {
                 onKey(['3'], () => {
                     this.interactInput(3)
                 })
-
-                
-                
                 this.initialized = true
             }
+            this.currentPuzzle = this.puzzles.find((p) => p.name === gameModel.currentPuzzle)
             this.advance(dt)
+            if (this.currentPuzzle) this.currentPuzzle.update(dt)
         },
+        render() {
+            if (this.currentPuzzle) this.currentPuzzle.render()
+            this.draw()
+            if (!this.context) return
+            this.context.save()
+            this.context.fillStyle = "black"
+            this.context.font = "12px mono"
+            this.context.fillText(gameModel.puzzle, 13, 120)
+            this.context.restore()
+        }
     })
 }

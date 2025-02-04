@@ -1,20 +1,27 @@
 import { map, Map, Room, View, Interaction, CompassDirection } from '../data/map.ts'
 import { Blip } from '../data/sfx.ts'
 import { say } from '../data/utils.ts'
+import { on } from 'kontra'
 
 export class GameModel {
     map: Map
     position: string | undefined
     facing: CompassDirection | ""
+    puzzle: ""
     visitedRooms: string[]
     state: Record<string,any>
 
     constructor() {
         this.map = map
         this.facing = ""
+        this.puzzle = ""
         this.visitedRooms = []
         this.state = {}
         this.moveTo(this.map.rooms[0].name)
+        on('activate', (variable: string) => {
+            console.log('activate', variable)
+            this.state[variable] = true
+        })
     }
 
     public get currentRoom(): Room | undefined {
@@ -23,6 +30,10 @@ export class GameModel {
 
     public get currentView(): View | undefined {
         return this.currentRoom?.views.find((v) => v.direction == this.facing)
+    }
+
+    public get currentPuzzle(): string | undefined {
+        return this.currentView?.puzzle
     }
 
     roomByName(name: string) {
@@ -48,8 +59,9 @@ export class GameModel {
     inspect() {
         if (this.facing === "") 
             say(this.currentRoom?.description, true)
-        else
+        else {
             say(this.currentView?.description, true)
+        }
     }
 
     interact(index: number) {
@@ -60,8 +72,6 @@ export class GameModel {
         switch (index) {
             case 0: // Space bar
                 if (this.currentView?.interaction) {
-                    
-                    
                     this.interaction(this.currentView.interaction)
                 }
                 break
@@ -81,7 +91,6 @@ export class GameModel {
                 say(option.message)
             }
             if (option.action) {
-                Blip()
                 this.action(option.action)
             }
 
@@ -93,13 +102,19 @@ export class GameModel {
         const [action, param] = command.split('_')
         switch (action) {
             case 'moveTo':
+                Blip()
                 this.moveTo(param)
                 break
             case 'activate':
+                Blip()
                 this.state[param] = true
                 break
             case 'toggle':
+                Blip()
                 this.state[param] = !this.state[param]
+                break
+            case 'puzzle':
+                // Let the puzzle handle the action
                 break
             default:
                 break
