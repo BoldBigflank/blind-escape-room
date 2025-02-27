@@ -7,7 +7,7 @@ const rlglProps = {
     progress: 0
 }
 
-export const RedLightSprite = () => {
+export const RedLight = () => {
     const s = Sprite({
         name: 'redLight',
         x: 150,
@@ -29,7 +29,7 @@ export const RedLightSprite = () => {
                 this.props.progress += dt! * 10
                 this.props.osc.frequency.value = toneLerp(440, 880, this.props.progress / 100)
                 if (this.props.progress >= 100) {
-                    emit('activate', 'redLight')
+                    emit('activate', 'potionPuzzle')
                     this.solved = true
                     this.props.osc.stop()
                 }

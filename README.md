@@ -34,9 +34,9 @@ You wake up in a strange laboratory.
 
 [ANIMALS]You find a combination lock. Animals in cages tell you the combination, and a poster shows air/land/water in order. Upon entering, you are able to [start the power generator]
 +
-[COMPUTER]A computer mainframe needs to be booted properly. After hitting the three buttons at the proper time, an [oscilliscope appears on the screen].
+[COMPUTER]A computer mainframe needs to be booted properly. After hitting the three buttons at the proper time, an [oscilloscope appears on the screen].
 +
-[OSCILLISCOPE]You see an Oscilliscope displaying a wavy line. After fixing the distortion, you [XXXXXXXXX]
+[OSCILLOSCOPE]You see an Oscilloscope displaying a wavy line. After fixing the distortion, you [XXXXXXXXX]
 
 [COMBOLIGHT]Buttons around the room toggle multiple lights/latches in an area. When all are set, then [XXXXXXXXX]
 
@@ -63,7 +63,7 @@ You wake up in a strange laboratory.
     [^] End
 [COMPUTER-DOOR]
     [^]
-    [OSCILLISCOPE]
+    [OSCILLOSCOPE]
     [COMBOLIGHT-1]
 
 [^]
