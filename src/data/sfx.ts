@@ -1,7 +1,9 @@
 import * as Tone from "tone";
 
 const synth = new Tone.Synth().toDestination();
+export const Wrong = () => synth.triggerAttackRelease("G3", "16n");
 export const Blip = () => synth.triggerAttackRelease("C4", "16n");
+export const Ding = () => synth.triggerAttackRelease("G4", "16n");
 
 // const osc = new Tone.Oscillator(440, "sine").toDestination().start();
 export const toneLerp = (start, end, interval) => {

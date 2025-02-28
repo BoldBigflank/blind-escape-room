@@ -52,8 +52,8 @@ const RoomSprite = () =>
 export const MapSprite = (gameModel: GameModel) => {
   const c = getCanvas();
   return Sprite({
-    x: c.width / 2,
-    y: c.height / 2,
+    x: c.width / 4,
+    y: c.height / 4,
     color: "red",
     width: 128,
     height: 128,
