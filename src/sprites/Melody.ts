@@ -1,15 +1,17 @@
 // Each button flips two+ different positions
 // Flipping the button plays the new state
-import { keyPressed, Sprite, emit } from "kontra";
+import * as Tone from "tone";
+import { emit, Sprite } from "kontra";
+import { Buzz, Ding } from "../data/sfx";
 
 const spriteProps = {
-  state: [0, 1, 0, 1, 0],
+  state: [2, 0, 1, 0, 2],
   progress: 0,
 };
 
 const SpriteFunction = () =>
   Sprite({
-    name: "comboLight",
+    name: "melody",
     x: 150,
     y: 0,
     width: 100,
@@ -22,17 +24,72 @@ const SpriteFunction = () =>
         // Set up the sounds
         this.props = { ...spriteProps };
         this.initialized = true;
-      }
-      if (keyPressed(["space"])) {
-        // Interaction
+        const vol = new Tone.Volume(-25).toDestination();
+        this.props.synth = new Tone.PolySynth(Tone.Synth)
+          .toDestination()
+          .connect(vol);
       }
       this.advance();
+      // console.log(this.gameModel.position, this.gameModel.facing);
+      const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;
+      if (this.roomKey !== roomKey) {
+        console.log(roomKey);
+
+        this.roomKey = roomKey;
+      }
+      if (!this.solved && this.props.progress === this.props.state.length) {
+        Ding();
+        emit("activate", "melodySolved");
+        this.solved = true;
+      }
     },
-    onExit() {
-      // this.props.osc.stop();
-    },
-    onEnter() {
-      // if (this.props.osc && !this.solved) this.props.osc.start();
+    onExit() {},
+    onEnter() {},
+    onInteract(index: number) {
+      if (index === 0) return; //Ignore space bar
+      console.log("interact", index);
+      if (!this.gameModel.state["potionSolved"]) {
+        Buzz();
+        return;
+      }
+
+      switch (this.roomKey) {
+        case "Start-n":
+          this.props.synth.triggerAttackRelease("G4", "8n");
+          if (this.props.state[this.props.progress] === 2) {
+            this.props.progress += 1;
+          } else {
+            this.props.progress = 0;
+          }
+          break;
+        case "Start-w":
+          this.props.synth.triggerAttackRelease("E4", "8n");
+          if (this.props.state[this.props.progress] === 1) {
+            this.props.progress += 1;
+          } else {
+            this.props.progress = 0;
+          }
+          break;
+        case "Start-s":
+          this.props.synth.triggerAttackRelease("C4", "8n");
+          if (this.props.state[this.props.progress] === 0) {
+            this.props.progress += 1;
+          } else {
+            this.props.progress = 0;
+          }
+          break;
+        case "Hub-n":
+          const now = Tone.now();
+          this.props.synth.releaseAll();
+          this.props.synth.triggerAttackRelease("G4", "8n", now);
+          this.props.synth.triggerAttackRelease("C4", "8n", now + 0.4);
+          this.props.synth.triggerAttackRelease("E4", "8n", now + 0.8);
+          this.props.synth.triggerAttackRelease("C4", "8n", now + 1.2);
+          this.props.synth.triggerAttackRelease("G4", "8n", now + 1.6);
+          break;
+        default:
+          break;
+      }
     },
     render() {
       if (!this.initialized) return;

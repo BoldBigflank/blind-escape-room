@@ -1,4 +1,4 @@
-import { getCanvas, onKey, Sprite } from "kontra";
+import { getCanvas, onGamepad, onKey, Sprite } from "kontra";
 import { GameModel } from "./GameModel";
 import { CompassDirection, Room } from "../data/map";
 import { RedLight } from "../sprites/RedLightGreenLight";
@@ -64,6 +64,8 @@ export const MapSprite = (gameModel: GameModel) => {
     },
     interactInput(idx: number) {
       gameModel.interact(idx);
+      if (this.currentPuzzle && this.currentPuzzle.onInteract)
+        this.currentPuzzle.onInteract(idx);
     },
     update(dt) {
       if (!this.initialized) {
@@ -141,6 +143,33 @@ export const MapSprite = (gameModel: GameModel) => {
         onKey(["3"], () => {
           this.interactInput(3);
         });
+
+        onGamepad(["up"], () => {
+          this.lookInput("n");
+        });
+        onGamepad(["right"], () => {
+          this.lookInput("e");
+        });
+        onGamepad(["down"], () => {
+          this.lookInput("s");
+        });
+        onGamepad(["left"], () => {
+          this.lookInput("w");
+        });
+
+        onGamepad(["south"], () => {
+          this.interactInput(0);
+        });
+        onGamepad(["west"], () => {
+          this.interactInput(1);
+        });
+        onGamepad(["north"], () => {
+          this.interactInput(2);
+        });
+        onGamepad(["east"], () => {
+          this.interactInput(3);
+        });
+
         this.initialized = true;
       }
       this.advance(dt);
@@ -151,8 +180,10 @@ export const MapSprite = (gameModel: GameModel) => {
         if (this.currentPuzzle && this.currentPuzzle.onExit)
           this.currentPuzzle.onExit();
         this.currentPuzzle = currentPuzzle;
-        if (this.currentPuzzle && this.currentPuzzle.onEnter)
-          this.currentPuzzle.onEnter();
+        if (this.currentPuzzle) {
+          this.currentPuzzle.gameModel = gameModel;
+          if (this.currentPuzzle.onEnter) this.currentPuzzle.onEnter();
+        }
       }
       if (this.currentPuzzle) this.currentPuzzle.update(dt);
     },

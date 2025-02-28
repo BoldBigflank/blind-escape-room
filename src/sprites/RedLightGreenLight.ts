@@ -1,4 +1,11 @@
-import { keyPressed, Sprite, emit, getCanvas, clamp } from "kontra";
+import {
+  keyPressed,
+  Sprite,
+  emit,
+  getCanvas,
+  clamp,
+  gamepadPressed,
+} from "kontra";
 import * as Tone from "tone";
 import { Ding, Wrong, toneLerp } from "../data/sfx";
 
@@ -30,7 +37,12 @@ export const RedLight = () => {
       }
       this.color = this.props.state;
       if (this.props.progress > 0) this.props.target += dt! * 8;
-      if (keyPressed(["space"])) {
+      if (
+        keyPressed(["1"]) ||
+        gamepadPressed("north") ||
+        gamepadPressed("west") ||
+        gamepadPressed("east")
+      ) {
         this.props.osc.start();
         this.props.progress += dt! * 12;
       } else {
@@ -51,7 +63,7 @@ export const RedLight = () => {
       }
       this.props.trouble = inTrouble;
       if (this.props.progress >= 100) {
-        emit("activate", "potionPuzzle");
+        emit("activate", "potionSolved");
         this.solved = true;
         this.props.state = "green";
         this.props.osc.stop();

@@ -115,6 +115,7 @@ const LaboratoryMap = {
         {
           direction: "n",
           description: "Melody1",
+          puzzle: "melody",
           interaction: [
             {
               condition: "melodySolved",
@@ -142,6 +143,7 @@ const LaboratoryMap = {
         {
           direction: "s",
           description: "Melody3",
+          puzzle: "melody",
           interaction: [
             {
               condition: "melodySolved",
@@ -160,6 +162,7 @@ const LaboratoryMap = {
         {
           direction: "w",
           description: "Melody2",
+          puzzle: "melody",
           interaction: [
             {
               condition: "melodySolved",
@@ -185,6 +188,7 @@ const LaboratoryMap = {
         {
           direction: "n",
           description: "The large door with an electronic lock.",
+          puzzle: "melody",
           interaction: [
             {
               condition: "melodySolved",
@@ -222,6 +226,10 @@ const LaboratoryMap = {
             {
               condition: "potionSolved",
               message: "The potion is consumed.",
+            },
+            {
+              message:
+                "A potion on a burner needs to be heated at the proper speed.",
             },
           ],
         },
