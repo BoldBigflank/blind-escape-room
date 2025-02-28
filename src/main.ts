@@ -1,7 +1,7 @@
-import './style.css'
-import { initGame } from './components/game.ts'
+import "./style.css";
+import { initGame } from "./components/game.ts";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <div id="intro">
       <div id="story">
@@ -20,14 +20,14 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <canvas id="renderCanvas" style="display:none;" width=640 height=480></canvas>
     </div>
   </div>
-`
+`;
 
-window.addEventListener('DOMContentLoaded', () => {
-  const b = document.getElementById('playButton')
-  if (!b) return
+window.addEventListener("DOMContentLoaded", () => {
+  const b = document.getElementById("playButton");
+  if (!b) return;
   b.onclick = () => {
-    document.getElementById('intro')!.style.display = 'none'
-    document.getElementById('renderCanvas')!.style.display = "block"
-    initGame()
-  }
-})
+    document.getElementById("intro")!.style.display = "none";
+    document.getElementById("renderCanvas")!.style.display = "block";
+    initGame();
+  };
+});
