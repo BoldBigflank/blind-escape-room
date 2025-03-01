@@ -72,6 +72,7 @@ export class GameModel {
 
   interact(index: number) {
     if (!this.currentView) {
+      console.log("no current view");
       this.inspect();
       return;
     }

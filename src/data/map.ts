@@ -203,11 +203,16 @@ const LaboratoryMap = {
         {
           direction: "e" as CompassDirection,
           description: "A Computer",
+          puzzle: "oscilloscope",
           interaction: [
             {
+              condition: "cpuSolved",
+              message:
+                "The oscilloscope is calibrated, a rumble is heard behind the desk nearby",
+            },
+            {
               condition: "animalSolved",
-              message: "You sit at the computer.",
-              action: "moveTo_CPU",
+              message: "",
             },
             {
               message: "The computer is not powered.",
