@@ -1,7 +1,7 @@
 // hitting space plays the solution for 1s,
 // hitting buttons changes the pitch, wave type, and volume
 import { emit, keyPressed, Sprite } from "kontra";
-import { Ding, Solved } from "../data/sfx";
+import { Solved } from "../data/sfx";
 import * as Tone from "tone";
 
 const spriteProps = {

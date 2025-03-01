@@ -2,7 +2,7 @@
 // Flipping the button plays the new state
 import * as Tone from "tone";
 import { emit, Sprite } from "kontra";
-import { Buzz, Ding, Solved } from "../data/sfx";
+import { Buzz, Solved } from "../data/sfx";
 
 const spriteProps = {
   state: [2, 0, 1, 0, 2],

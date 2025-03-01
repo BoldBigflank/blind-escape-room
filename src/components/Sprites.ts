@@ -1,4 +1,4 @@
-import { getCanvas, onGamepad, onKey, Sprite } from "kontra";
+import { onGamepad, onKey, Sprite } from "kontra";
 import { GameModel } from "./GameModel";
 import { CompassDirection, Room } from "../data/map";
 import { RedLight } from "../sprites/RedLightGreenLight";
@@ -52,7 +52,6 @@ const RoomSprite = () =>
   });
 
 export const MapSprite = (gameModel: GameModel) => {
-  const c = getCanvas();
   return Sprite({
     x: 0,
     y: 0,

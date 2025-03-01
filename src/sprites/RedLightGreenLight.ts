@@ -1,13 +1,6 @@
-import {
-  keyPressed,
-  Sprite,
-  emit,
-  getCanvas,
-  clamp,
-  gamepadPressed,
-} from "kontra";
+import { keyPressed, Sprite, emit, clamp, gamepadPressed } from "kontra";
 import * as Tone from "tone";
-import { Ding, Solved, Wrong, toneLerp } from "../data/sfx";
+import { Solved, Wrong, toneLerp } from "../data/sfx";
 
 const redLightProps = {
   state: "white", // orange, red, green
@@ -18,7 +11,6 @@ const redLightProps = {
 };
 
 export const RedLight = () => {
-  const c = getCanvas();
   const s = Sprite({
     name: "redLight",
     x: 160,
