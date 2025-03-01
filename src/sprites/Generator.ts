@@ -1,9 +1,12 @@
 // Each button flips two+ different positions
 // Flipping the button plays the new state
-import { keyPressed, Sprite, emit } from "kontra";
+import { emit, keyPressed, Sprite } from "kontra";
+import { Ding } from "../data/sfx";
+import { say } from "../data/utils";
 
 const spriteProps = {
-  state: [0, 1, 0, 1, 0],
+  solution: [3, 4, 1],
+  state: [1, 1, 1],
   progress: 0,
 };
 
@@ -16,7 +19,7 @@ const SpriteFunction = () =>
     height: 100,
     color: "red",
     props: {},
-    update(dt) {
+    update() {
       if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds
@@ -33,6 +36,17 @@ const SpriteFunction = () =>
     },
     onEnter() {
       // if (this.props.osc && !this.solved) this.props.osc.start();
+    },
+    onInteract(index) {
+      if (index === 0) return;
+      this.props.state[index - 1] = (this.props.state[index - 1] % 5) + 1;
+      console.log(this.props.state);
+      if (this.props.state.every((v, i) => v === this.props.solution[i])) {
+        Ding();
+        emit("activate", "animalSolved");
+      } else {
+        say(`${this.props.state.join(", ")}.`, true);
+      }
     },
     render() {
       if (!this.initialized) return;

@@ -1,6 +1,6 @@
 // Each button flips two+ different positions
 // Flipping the button plays the new state
-import { keyPressed, Sprite, emit } from "kontra";
+import { keyPressed, Sprite } from "kontra";
 
 const spriteProps = {
   state: [0, 1, 0, 1, 0],
@@ -16,7 +16,7 @@ const SpriteFunction = () =>
     height: 100,
     color: "red",
     props: {},
-    update(dt) {
+    update() {
       if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds

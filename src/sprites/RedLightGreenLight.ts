@@ -9,7 +9,7 @@ import {
 import * as Tone from "tone";
 import { Ding, Wrong, toneLerp } from "../data/sfx";
 
-const rlglProps = {
+const redLightProps = {
   state: "orange", // orange, red, green
   progress: 0,
   buffer: 10,
@@ -30,7 +30,7 @@ export const RedLight = () => {
     update(dt) {
       if (this.solved) return;
       if (!this.initialized) {
-        this.props = { ...rlglProps };
+        this.props = { ...redLightProps };
         this.initialized = true;
         const vol = new Tone.Volume(-25).toDestination();
         this.props.osc = new Tone.Oscillator(440, "sine").connect(vol);
@@ -76,7 +76,7 @@ export const RedLight = () => {
           // RESET THE GAME
           this.props = {
             ...this.props,
-            ...rlglProps,
+            ...redLightProps,
           };
           if (this.props.osc) this.props.osc.type = "sine";
           this.props.osc.stop();

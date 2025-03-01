@@ -16,7 +16,7 @@ const SpriteFunction = () =>
     height: 100,
     color: "red",
     props: {},
-    update(dt) {
+    update() {
       if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds
@@ -33,6 +33,10 @@ const SpriteFunction = () =>
     },
     onEnter() {
       // if (this.props.osc && !this.solved) this.props.osc.start();
+    },
+    onInteract(index) {
+      if (index === 0) return;
+      emit("activate", "comboSolved");
     },
     render() {
       if (!this.initialized) return;

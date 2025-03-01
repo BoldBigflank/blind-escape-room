@@ -24,7 +24,7 @@ export type Map = {
   title: string;
   rooms: Room[];
 };
-
+/* 
 const testMap = {
   title: "test",
   rooms: [
@@ -35,7 +35,7 @@ const testMap = {
       description: "This is the lobby.",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "A door to the kitchen.",
           interaction: [
             {
@@ -49,7 +49,7 @@ const testMap = {
           ],
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "A flower with a delightful scent on a table.",
           interaction: [
             {
@@ -63,11 +63,11 @@ const testMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "A locked door to the outside.",
         },
         {
-          direction: "w",
+          direction: "w" as CompassDirection,
           description: "A mirror, which isn't too helpful.",
         },
       ],
@@ -78,16 +78,16 @@ const testMap = {
       description: "This is the kitchen.",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "Some pots and pans on a counter.",
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "A gas stove.",
           puzzle: "redLight",
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           interaction: [
             {
               action: "moveTo_lobby",
@@ -96,14 +96,14 @@ const testMap = {
           description: "There is a door to the lobby.",
         },
         {
-          direction: "w",
+          direction: "w" as CompassDirection,
           description: "A large sink.",
         },
       ],
     },
   ],
 } as Map;
-
+ */
 const LaboratoryMap = {
   title: "laboratory",
   rooms: [
@@ -113,7 +113,7 @@ const LaboratoryMap = {
       description: "Start",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "Melody1",
           puzzle: "melody",
           interaction: [
@@ -132,7 +132,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "The door to the Hub",
           interaction: [
             {
@@ -141,7 +141,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "Melody3",
           puzzle: "melody",
           interaction: [
@@ -160,7 +160,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "w",
+          direction: "w" as CompassDirection,
           description: "Melody2",
           puzzle: "melody",
           interaction: [
@@ -186,7 +186,7 @@ const LaboratoryMap = {
       description: "Hub",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "The large door with an electronic lock.",
           puzzle: "melody",
           interaction: [
@@ -201,7 +201,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "A Computer",
           interaction: [
             {
@@ -215,7 +215,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "A door to the Combo Room",
           puzzle: "redLight",
           interaction: [
@@ -234,7 +234,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "w",
+          direction: "w" as CompassDirection,
           description: "A door to the Start",
           interaction: [
             {
@@ -250,7 +250,7 @@ const LaboratoryMap = {
       description: "CPU",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "Amplitude",
           interaction: [
             {
@@ -264,7 +264,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "Phase",
           interaction: [
             {
@@ -273,7 +273,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "Frequency",
           interaction: [
             {
@@ -282,7 +282,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "w",
+          direction: "w" as CompassDirection,
           description: "Exit the computer",
           interaction: [
             {
@@ -294,11 +294,11 @@ const LaboratoryMap = {
     },
     {
       name: "Animal1",
-      intro: "Animal1",
-      description: "Animal1",
+      intro: "A long hallway with caged animals making noises.",
+      description: "Caged animal room",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "The animal room continues",
           interaction: [
             {
@@ -307,7 +307,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "A sign showing wind, earth, and water",
           interaction: [
             {
@@ -316,7 +316,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "A door to the Hub",
           interaction: [
             {
@@ -325,8 +325,8 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "w",
-          description: "An eagle",
+          direction: "w" as CompassDirection,
+          description: "An eagle says caw, caw, caw.",
           interaction: [
             {
               message: "DefaultInteraction",
@@ -337,12 +337,13 @@ const LaboratoryMap = {
     },
     {
       name: "Animal2",
-      intro: "Animal2",
-      description: "Animal2",
+      intro: "Even more animals are caged here.",
+      description: "The north side of the animal room.",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "A generator with a 3-button combination lock",
+          puzzle: "animal",
           interaction: [
             {
               condition: "animalSolved",
@@ -355,8 +356,8 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "e",
-          description: "A fish",
+          direction: "e" as CompassDirection,
+          description: "A fish says blub.",
           interaction: [
             {
               message: "DefaultInteraction",
@@ -364,7 +365,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "The animal room continues",
           interaction: [
             {
@@ -373,8 +374,8 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "w",
-          description: "A chimpanzee",
+          direction: "w" as CompassDirection,
+          description: "A chimpanzee says ooh ooh eeh eeh.",
           interaction: [
             {
               message: "DefaultInteraction",
@@ -389,7 +390,7 @@ const LaboratoryMap = {
       description: "Combo",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "A door to the Hub",
           interaction: [
             {
@@ -398,7 +399,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "A series of buttons",
           interaction: [
             {
@@ -407,7 +408,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "A door",
           interaction: [
             {
@@ -420,7 +421,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "w",
+          direction: "w" as CompassDirection,
           description: "A series of buttons",
           interaction: [
             {
@@ -441,7 +442,7 @@ const LaboratoryMap = {
       description: "End",
       views: [
         {
-          direction: "n",
+          direction: "n" as CompassDirection,
           description: "A door to the Combo room",
           interaction: [
             {
@@ -450,7 +451,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "e",
+          direction: "e" as CompassDirection,
           description: "ViewDescription",
           interaction: [
             {
@@ -459,7 +460,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "s",
+          direction: "s" as CompassDirection,
           description: "ViewDescription",
           interaction: [
             {
@@ -468,7 +469,7 @@ const LaboratoryMap = {
           ],
         },
         {
-          direction: "w",
+          direction: "w" as CompassDirection,
           description: "ViewDescription",
           interaction: [
             {

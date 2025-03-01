@@ -18,7 +18,7 @@ const SpriteFunction = () =>
     height: 100,
     color: "red",
     props: {},
-    update(dt) {
+    update() {
       if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds
