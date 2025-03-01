@@ -6,11 +6,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <div id="intro">
       <div id="story">
         <h3>Story</h3>
-        <p>You are a person. You are tasked with escaping the escape room.</p>
+        <p>You find yourself inside a mad scientist's laboratory. There must be a way out, but it is hidden behind some puzzles.</p>
       </div>
       <div id="controls">
         <h3>Controls</h3>
-        Use the keyboard and space bar to interact
+        Use the arrow keys to look in a compass direction (north, south, east, west).
+        Use the space bar to move.
+        Use number 1, 2, and 3 to interact with your current view.
       </div>
       <div class="logo">
         <button id="playButton">Play</button>
