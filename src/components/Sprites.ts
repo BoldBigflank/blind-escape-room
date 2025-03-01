@@ -9,6 +9,8 @@ import { Melody } from "../sprites/Melody";
 
 const ROOM_SIZE = 48;
 const ROOM_PADDING = 8;
+const MAP_OFFSET_X = 25;
+const MAP_OFFSET_Y = 200;
 
 const RoomSprite = () =>
   Sprite({
@@ -28,7 +30,7 @@ const RoomSprite = () =>
       )
         return;
       // Hide rooms that haven't been entered yet
-      if (!this.gameModel.visitedRooms.includes(this.name)) return;
+      // if (!this.gameModel.visitedRooms.includes(this.name)) return;
       this.draw();
       if (this.gameModel.position === this.name) {
         let offsetX = this.width / 2 - 4,
@@ -52,11 +54,8 @@ const RoomSprite = () =>
 export const MapSprite = (gameModel: GameModel) => {
   const c = getCanvas();
   return Sprite({
-    x: c.width / 4,
-    y: c.height / 4,
-    color: "red",
-    width: 128,
-    height: 128,
+    x: 0,
+    y: 0,
     anchor: { x: 0.5, y: 0.5 },
     puzzles: [RedLight(), ComboLight(), Generator(), Oscilloscope(), Melody()],
     lookInput(direction: CompassDirection) {
@@ -81,8 +80,8 @@ export const MapSprite = (gameModel: GameModel) => {
             const r = RoomSprite();
             r.gameModel = gameModel;
             r.name = currentRoom.name;
-            r.x = x;
-            r.y = y;
+            r.x = x + MAP_OFFSET_X;
+            r.y = y + MAP_OFFSET_Y;
             this.addChild(r);
 
             currentRoom.views.forEach((v) => {
@@ -188,14 +187,15 @@ export const MapSprite = (gameModel: GameModel) => {
       if (this.currentPuzzle) this.currentPuzzle.update(dt);
     },
     render() {
-      if (this.currentPuzzle) this.currentPuzzle.render();
-      this.draw();
       if (!this.context) return;
       this.context.save();
       this.context.fillStyle = "black";
       this.context.font = "12px mono";
-      this.context.fillText(gameModel.puzzle, 13, 120);
+      this.context.fillRect(160, 0, 480, 480);
       this.context.restore();
+
+      if (this.currentPuzzle) this.currentPuzzle.render();
+      // this.draw();
     },
   });
 };

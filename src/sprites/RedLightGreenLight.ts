@@ -10,7 +10,7 @@ import * as Tone from "tone";
 import { Ding, Solved, Wrong, toneLerp } from "../data/sfx";
 
 const redLightProps = {
-  state: "orange", // orange, red, green
+  state: "white", // orange, red, green
   progress: 0,
   buffer: 10,
   target: 0,
@@ -21,11 +21,9 @@ export const RedLight = () => {
   const c = getCanvas();
   const s = Sprite({
     name: "redLight",
-    x: c.width * 0.5,
+    x: 160,
     y: 0,
-    width: 40,
-    height: 100,
-    color: "red",
+    color: "grey",
     props: {},
     update(dt) {
       if (this.solved) return;
@@ -93,38 +91,43 @@ export const RedLight = () => {
     },
     render() {
       if (!this.initialized) return;
-      this.draw();
       const ctx = this.context;
       if (!ctx) return;
+      ctx.save();
+      ctx.fillStyle = "grey";
+      ctx.fillRect(10, 10, 460, 460);
+      ctx.restore();
+
+      // Tube
+      ctx.save();
+      ctx.fillStyle = this.color as string;
+      ctx.fillRect(220, 80, 40, 210);
+      ctx.restore();
 
       // Bulb
       ctx.save();
+      ctx.fillStyle = this.color as string;
       ctx.beginPath();
-      ctx.arc(this.width! * 0.5, this.height! + 0, 25, 0, 2 * Math.PI);
+      ctx.arc(240, 290, 25, 0, 2 * Math.PI);
       ctx.fill();
       ctx.fillStyle = "red";
       ctx.beginPath();
-      ctx.arc(this.width! * 0.5, this.height! + 0, 15, 0, 2 * Math.PI);
+      ctx.arc(240, 290, 15, 0, 2 * Math.PI);
       ctx.fill();
       ctx.restore();
 
       // Progress bar
-      const fillHeight = 0.8 * this.props.progress;
+      const fillHeight = -2 * this.props.progress;
       ctx.save();
       ctx.fillStyle = "red";
-      ctx.fillRect(
-        10,
-        this.height! - fillHeight - 10,
-        this.width! - 20,
-        fillHeight,
-      );
+      ctx.fillRect(227, 290, 26, fillHeight);
       ctx.restore();
 
       // Target range
-      const hightTarget = 0.8 * this.props.target + 4;
+      const hightTarget = 2 * this.props.target + 10;
       ctx.save();
       ctx.fillStyle = "black";
-      ctx.fillRect(10, this.height! - hightTarget - 10, 5, 8);
+      ctx.fillRect(225, 290 - hightTarget, 5, 20);
       ctx.restore();
     },
   });
