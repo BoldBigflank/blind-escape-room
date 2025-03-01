@@ -2,7 +2,7 @@
 // Flipping the button plays the new state
 import * as Tone from "tone";
 import { emit, Sprite } from "kontra";
-import { Buzz, Ding } from "../data/sfx";
+import { Buzz, Ding, Solved } from "../data/sfx";
 
 const spriteProps = {
   state: [2, 0, 1, 0, 2],
@@ -33,12 +33,10 @@ const SpriteFunction = () =>
       // console.log(this.gameModel.position, this.gameModel.facing);
       const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;
       if (this.roomKey !== roomKey) {
-        console.log(roomKey);
-
         this.roomKey = roomKey;
       }
       if (!this.solved && this.props.progress === this.props.state.length) {
-        Ding();
+        Solved();
         emit("activate", "melodySolved");
         this.solved = true;
       }

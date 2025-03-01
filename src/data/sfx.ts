@@ -4,6 +4,16 @@ const synth = new Tone.Synth().toDestination();
 export const Wrong = () => synth.triggerAttackRelease("G3", "16n");
 export const Blip = () => synth.triggerAttackRelease("C4", "16n");
 export const Ding = () => synth.triggerAttackRelease("G4", "16n");
+export const Solved = () => {
+  const now = Tone.now();
+  melodySynth.releaseAll();
+  melodySynth.triggerAttackRelease("C4", "8n", now);
+  melodySynth.triggerAttackRelease("E4", "8n", now + 0.1);
+  melodySynth.triggerAttackRelease("G4", "8n", now + 0.2);
+  melodySynth.triggerAttackRelease("B4", "8n", now + 0.3);
+  melodySynth.triggerAttackRelease("C5", "8n", now + 0.4);
+};
+
 export const Buzz = () => synth.triggerAttackRelease("G2", "32n");
 
 const melodySynth = new Tone.PolySynth(Tone.Synth).toDestination();

@@ -7,7 +7,7 @@ import {
   gamepadPressed,
 } from "kontra";
 import * as Tone from "tone";
-import { Ding, Wrong, toneLerp } from "../data/sfx";
+import { Ding, Solved, Wrong, toneLerp } from "../data/sfx";
 
 const redLightProps = {
   state: "orange", // orange, red, green
@@ -67,7 +67,7 @@ export const RedLight = () => {
         this.solved = true;
         this.props.state = "green";
         this.props.osc.stop();
-        Ding();
+        Solved();
       }
       if (this.props.trouble) {
         this.props.buffer -= dt! * 5;

@@ -1,7 +1,7 @@
 // Each button flips two+ different positions
 // Flipping the button plays the new state
 import { emit, keyPressed, Sprite } from "kontra";
-import { Ding } from "../data/sfx";
+import { Ding, Solved } from "../data/sfx";
 import { say } from "../data/utils";
 
 const spriteProps = {
@@ -42,7 +42,7 @@ const SpriteFunction = () =>
       this.props.state[index - 1] = (this.props.state[index - 1] % 5) + 1;
       console.log(this.props.state);
       if (this.props.state.every((v, i) => v === this.props.solution[i])) {
-        Ding();
+        Solved();
         emit("activate", "animalSolved");
       } else {
         say(`${this.props.state.join(", ")}.`, true);

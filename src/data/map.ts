@@ -406,6 +406,7 @@ const LaboratoryMap = {
         {
           direction: "e" as CompassDirection,
           description: "A series of buttons",
+          puzzle: "combo",
           interaction: [
             {
               message: "DefaultInteraction",
@@ -428,14 +429,14 @@ const LaboratoryMap = {
         {
           direction: "w" as CompassDirection,
           description: "A series of buttons",
+          puzzle: "combo",
           interaction: [
             {
               condition: "comboSolved",
               message: "You have set the combination.",
             },
             {
-              action: "activate_comboSolved",
-              message: "A door unlocks.",
+              message: "Three buttons.",
             },
           ],
         },
