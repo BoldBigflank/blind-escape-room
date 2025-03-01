@@ -104,11 +104,13 @@ const SpriteFunction = () =>
     render() {
       if (!this.initialized) return;
       if (!this.gameModel || !this.gameModel.state.animalSolved) return;
-      if (this.solved) return;
-      this.draw();
       const ctx = this.context;
       if (!ctx) return;
+
+      // Background
       ctx.save();
+      ctx.fillStyle = "grey";
+      ctx.fillRect(10, 10, 460, 460);
       ctx.restore();
     },
   });

@@ -362,7 +362,7 @@ const LaboratoryMap = {
         },
         {
           direction: "e" as CompassDirection,
-          description: "A fish says blub.",
+          description: "A fish says blub blub.",
           interaction: [
             {
               message: "DefaultInteraction",

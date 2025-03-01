@@ -1,11 +1,11 @@
 // Each button flips two+ different positions
 // Flipping the button plays the new state
 import { emit, keyPressed, Sprite } from "kontra";
-import { Ding, Solved } from "../data/sfx";
+import { Solved } from "../data/sfx";
 import { say } from "../data/utils";
 
 const spriteProps = {
-  solution: [3, 4, 1],
+  solution: [3, 4, 2],
   state: [1, 1, 1],
   progress: 0,
 };
@@ -13,10 +13,8 @@ const spriteProps = {
 const SpriteFunction = () =>
   Sprite({
     name: "animal",
-    x: 150,
+    x: 160,
     y: 0,
-    width: 100,
-    height: 100,
     color: "red",
     props: {},
     update() {
@@ -50,10 +48,11 @@ const SpriteFunction = () =>
     },
     render() {
       if (!this.initialized) return;
-      this.draw();
       const ctx = this.context;
       if (!ctx) return;
       ctx.save();
+      ctx.fillStyle = "grey";
+      ctx.fillRect(10, 10, 460, 460);
       ctx.restore();
     },
   });

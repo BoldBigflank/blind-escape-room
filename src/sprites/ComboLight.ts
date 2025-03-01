@@ -18,10 +18,8 @@ const spriteProps = {
 const SpriteFunction = () =>
   Sprite({
     name: "combo",
-    x: 150,
+    x: 160,
     y: 0,
-    width: 100,
-    height: 100,
     color: "red",
     props: {},
     update() {
@@ -93,13 +91,18 @@ const SpriteFunction = () =>
     },
     render() {
       if (!this.initialized) return;
-      // this.draw();
       const ctx = this.context;
       if (!ctx) return;
+      // Background
+      ctx.save();
+      ctx.fillStyle = "grey";
+      ctx.fillRect(10, 10, 460, 460);
+      ctx.restore();
+
       ctx.save();
       this.props.state.forEach((value, index) => {
         ctx.fillStyle = value ? "green" : "red";
-        ctx.fillRect(index * 25, 25, 20, 20);
+        ctx.fillRect(170 + index * 25, 220, 20, 20);
       });
       ctx.restore();
     },
