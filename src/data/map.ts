@@ -221,7 +221,8 @@ const LaboratoryMap = {
         },
         {
           direction: "s" as CompassDirection,
-          description: "A door to the Combo Room",
+          description:
+            "A potion labeled Sensory Enhancer sits on a table. It has a warning that it must be slowly heated first.",
           puzzle: "redLight",
           interaction: [
             {
@@ -233,8 +234,7 @@ const LaboratoryMap = {
               message: "The potion is consumed.",
             },
             {
-              message:
-                "A potion on a burner needs to be heated at the proper speed.",
+              message: "Hold 1 to add heat to the potion.",
             },
           ],
         },
