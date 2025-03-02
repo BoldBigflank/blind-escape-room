@@ -6,10 +6,11 @@ import { ComboLight } from "../sprites/ComboLight";
 import { Generator } from "../sprites/Generator";
 import { Oscilloscope } from "../sprites/Oscilloscope";
 import { Melody } from "../sprites/Melody";
+import { Boot } from "../sprites/Boot";
 
 const ROOM_SIZE = 48;
 const ROOM_PADDING = 8;
-const MAP_OFFSET_X = 25;
+const MAP_OFFSET_X = 0;
 const MAP_OFFSET_Y = 200;
 
 const RoomSprite = () =>
@@ -30,7 +31,7 @@ const RoomSprite = () =>
       )
         return;
       // Hide rooms that haven't been entered yet
-      // if (!this.gameModel.visitedRooms.includes(this.name)) return;
+      if (!this.gameModel.visitedRooms.includes(this.name)) return;
       this.draw();
       if (this.gameModel.position === this.name) {
         let offsetX = this.width / 2 - 4,
@@ -56,7 +57,14 @@ export const MapSprite = (gameModel: GameModel) => {
     x: 0,
     y: 0,
     anchor: { x: 0.5, y: 0.5 },
-    puzzles: [RedLight(), ComboLight(), Generator(), Oscilloscope(), Melody()],
+    puzzles: [
+      RedLight(),
+      ComboLight(),
+      Generator(),
+      Oscilloscope(),
+      Melody(),
+      Boot(),
+    ],
     lookInput(direction: CompassDirection) {
       gameModel.lookAt(direction);
     },

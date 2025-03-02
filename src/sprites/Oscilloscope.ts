@@ -17,11 +17,6 @@ const options: any[][] = [
 const SpriteFunction = () =>
   Sprite({
     name: "oscilloscope",
-    x: 150,
-    y: 0,
-    width: 100,
-    height: 100,
-    color: "red",
     props: {},
     update() {
       if (this.solved) return;

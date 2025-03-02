@@ -123,8 +123,7 @@ const LaboratoryMap = {
             },
             {
               condition: "potionSolved",
-              message: "You play a tune.",
-              action: "activate_melodySolved",
+              message: "Press 1 to play a tone.",
             },
             {
               message: "There's no noticeable effect.",
@@ -151,8 +150,7 @@ const LaboratoryMap = {
             },
             {
               condition: "potionSolved",
-              message: "You play a tune.",
-              action: "activate_melodySolved",
+              message: "Press 1 to play a tone.",
             },
             {
               message: "There's no noticeable effect.",
@@ -170,8 +168,7 @@ const LaboratoryMap = {
             },
             {
               condition: "potionSolved",
-              message: "You play a tune.",
-              action: "activate_melodySolved",
+              message: "Press 1 to play a tone.",
             },
             {
               message: "There's no noticeable effect.",
@@ -203,7 +200,7 @@ const LaboratoryMap = {
         {
           direction: "e" as CompassDirection,
           description: "A Computer",
-          puzzle: "oscilloscope",
+          puzzle: "boot",
           interaction: [
             {
               condition: "cpuSolved",
@@ -211,8 +208,12 @@ const LaboratoryMap = {
                 "The oscilloscope is calibrated, a rumble is heard behind the desk nearby",
             },
             {
+              condition: "bootSolved",
+              action: "moveTo_CPU",
+            },
+            {
               condition: "animalSolved",
-              message: "",
+              message: "The computer is ready to boot.",
             },
             {
               message: "The computer is not powered.",
@@ -221,8 +222,9 @@ const LaboratoryMap = {
         },
         {
           direction: "s" as CompassDirection,
-          description:
+          intro:
             "A potion labeled Sensory Enhancer sits on a table. It has a warning that it must be slowly heated first.",
+          description: "A potion in front of a suspicious wall.",
           puzzle: "redLight",
           interaction: [
             {
@@ -256,33 +258,34 @@ const LaboratoryMap = {
       views: [
         {
           direction: "n" as CompassDirection,
-          description: "Amplitude",
+          description: "An Oscilloscope.",
+          puzzle: "oscilloscope",
           interaction: [
             {
               condition: "cpuSolved",
               message: "The waveform is synchronized.",
             },
-            {
-              action: "activate_cpuSolved",
-              message: "You synchronize the waveform",
-            },
           ],
         },
         {
           direction: "e" as CompassDirection,
-          description: "Phase",
+          description: "An Oscilloscope.",
+          puzzle: "oscilloscope",
           interaction: [
             {
-              message: "DefaultInteraction",
+              condition: "cpuSolved",
+              message: "The waveform is synchronized.",
             },
           ],
         },
         {
           direction: "s" as CompassDirection,
-          description: "Frequency",
+          puzzle: "oscilloscope",
+          description: "An Oscilloscope.",
           interaction: [
             {
-              message: "DefaultInteraction",
+              condition: "cpuSolved",
+              message: "The waveform is synchronized.",
             },
           ],
         },
@@ -353,10 +356,6 @@ const LaboratoryMap = {
             {
               condition: "animalSolved",
               message: "The generator is on.",
-            },
-            {
-              action: "activate_animalSolved",
-              message: "The generator kicks on.",
             },
           ],
         },
