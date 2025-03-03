@@ -149,16 +149,16 @@ export const MapSprite = (gameModel: GameModel) => {
           this.interactInput(3);
         });
 
-        onGamepad(["up"], () => {
+        onGamepad(["dpadup"], () => {
           this.lookInput("n");
         });
-        onGamepad(["right"], () => {
+        onGamepad(["dpadright"], () => {
           this.lookInput("e");
         });
-        onGamepad(["down"], () => {
+        onGamepad(["dpaddown"], () => {
           this.lookInput("s");
         });
-        onGamepad(["left"], () => {
+        onGamepad(["dpadleft"], () => {
           this.lookInput("w");
         });
 

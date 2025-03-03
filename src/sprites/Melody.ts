@@ -43,6 +43,7 @@ const SpriteFunction = () =>
       if (this.update) this.update();
       if (!this.gameModel.state.potionSolved) return;
       if (this.roomKey !== "Hub-n") return;
+      if (this.gameModel.state.melodySolved) return;
       const now = Tone.now();
       this.props.synth.releaseAll();
       this.props.synth.triggerAttackRelease("G4", "8n", now + 2);
