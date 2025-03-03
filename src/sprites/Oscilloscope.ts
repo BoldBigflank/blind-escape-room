@@ -5,13 +5,13 @@ import { Solved } from "../data/sfx";
 import * as Tone from "tone";
 
 const spriteProps = {
-  solution: ["F4", "triangle", 25],
-  state: ["C4", "sine", 10],
+  solution: ["F4", "triangle", -26],
+  state: ["C4", "sine", -20],
 };
 const options: any[][] = [
   ["C4", "D4", "E4", "F4", "G4"],
   ["triangle", "sine", "square"],
-  [10, 15, 25, 35, 45],
+  [-20, -23, -26, -29],
 ];
 
 const SpriteFunction = () =>
@@ -64,7 +64,6 @@ const SpriteFunction = () =>
       }
     },
     onInteract(index) {
-      if (!this.gameModel.state.animalSolved) return;
       if (this.solved) return;
       if (index === 0) {
         this.props.oscSolution.start(0, 0).stop("+1");
@@ -95,7 +94,6 @@ const SpriteFunction = () =>
 
     render() {
       if (!this.initialized) return;
-      if (!this.gameModel || !this.gameModel.state.animalSolved) return;
       const ctx = this.context;
       if (!ctx) return;
 

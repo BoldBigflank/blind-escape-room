@@ -176,12 +176,12 @@ const LaboratoryMap = {
     {
       name: "CPU",
       intro: "The computer shows two wavy lines that currently do not overlap.",
-      description: "The computer shows an oscilloscope with two inputs.",
+      description:
+        "The computer shows an oscilloscope with two inputs. Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
       views: [
         {
           direction: "n" as CompassDirection,
-          description:
-            "Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
+          description: "",
           puzzle: "oscilloscope",
           interaction: [
             {
@@ -192,8 +192,7 @@ const LaboratoryMap = {
         },
         {
           direction: "e" as CompassDirection,
-          description:
-            "Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
+          description: "",
           puzzle: "oscilloscope",
           interaction: [
             {
@@ -205,8 +204,7 @@ const LaboratoryMap = {
         {
           direction: "s" as CompassDirection,
           puzzle: "oscilloscope",
-          description:
-            "Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
+          description: "",
           interaction: [
             {
               condition: "cpuSolved",
