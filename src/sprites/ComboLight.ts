@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import { keyPressed, Sprite, emit } from "kontra";
+import { Sprite, emit } from "kontra";
 import { Solved } from "../data/sfx";
 
 const spriteProps = {
@@ -38,9 +38,6 @@ const SpriteFunction = () =>
         });
         this.initialized = true;
       }
-      if (keyPressed(["space"])) {
-        // Interaction
-      }
       this.advance();
       const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;
       if (this.roomKey !== roomKey) {
@@ -48,12 +45,10 @@ const SpriteFunction = () =>
       }
     },
     hitButton(buttonIndex) {
-      console.log(buttonIndex, this.props.buttons[buttonIndex]);
       const switchIndexes = this.props.buttons[buttonIndex];
       switchIndexes.forEach((switchIndex) => {
         this.props.state[switchIndex] = this.props.state[switchIndex] ? 0 : 1;
       });
-      console.log(this.props.state);
     },
     playCombo() {
       const now = Tone.now();
@@ -102,7 +97,7 @@ const SpriteFunction = () =>
       ctx.save();
       this.props.state.forEach((value, index) => {
         ctx.fillStyle = value ? "green" : "red";
-        ctx.fillRect(170 + index * 25, 220, 20, 20);
+        ctx.fillRect(21 + index * 92, 206, 69, 69);
       });
       ctx.restore();
     },

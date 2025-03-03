@@ -26,7 +26,6 @@ export class GameModel {
     this.state = {};
     this.moveTo(this.map.rooms[0].name);
     on("activate", (variable: string) => {
-      console.log("activate", variable);
       this.state[variable] = true;
     });
   }
@@ -72,7 +71,6 @@ export class GameModel {
 
   interact(index: number) {
     if (!this.currentView) {
-      console.log("no current view");
       this.inspect();
       return;
     }

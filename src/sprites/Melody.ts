@@ -17,22 +17,21 @@ const SpriteFunction = () =>
     color: "red",
     props: {},
     update() {
-      if (this.solved) return;
-      if (!this.initialized) {
-        // Set up the sounds
-        this.props = { ...spriteProps };
-        this.initialized = true;
-        const vol = new Tone.Volume(-25).toDestination();
-        this.props.synth = new Tone.PolySynth(Tone.Synth)
-          .toDestination()
-          .connect(vol);
-      }
-      this.advance();
-      // console.log(this.gameModel.position, this.gameModel.facing);
       const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;
       if (this.roomKey !== roomKey) {
         this.roomKey = roomKey;
       }
+      if (this.solved) return;
+      if (!this.initialized) {
+        // Set up the sounds
+        this.props = { ...spriteProps };
+        const vol = new Tone.Volume(-25).toDestination();
+        this.props.synth = new Tone.PolySynth(Tone.Synth)
+          .toDestination()
+          .connect(vol);
+        this.initialized = true;
+      }
+      this.advance();
       if (!this.solved && this.props.progress === this.props.state.length) {
         Solved();
         emit("activate", "melodySolved");
@@ -40,10 +39,20 @@ const SpriteFunction = () =>
       }
     },
     onExit() {},
-    onEnter() {},
+    onEnter() {
+      if (this.update) this.update();
+      if (!this.gameModel.state.potionSolved) return;
+      if (this.roomKey !== "Hub-n") return;
+      const now = Tone.now();
+      this.props.synth.releaseAll();
+      this.props.synth.triggerAttackRelease("G4", "8n", now + 2);
+      this.props.synth.triggerAttackRelease("C4", "8n", now + 2.4);
+      this.props.synth.triggerAttackRelease("E4", "8n", now + 2.8);
+      this.props.synth.triggerAttackRelease("C4", "8n", now + 3.2);
+      this.props.synth.triggerAttackRelease("G4", "8n", now + 3.6);
+    },
     onInteract(index: number) {
       if (index === 0) return; //Ignore space bar
-      console.log("interact", index);
       if (!this.gameModel.state["potionSolved"]) {
         Buzz();
         return;
@@ -55,7 +64,7 @@ const SpriteFunction = () =>
           if (this.props.state[this.props.progress] === 2) {
             this.props.progress += 1;
           } else {
-            this.props.progress = 0;
+            this.props.progress = 1; // It's correct for position 0
           }
           break;
         case "Start-w":
@@ -74,15 +83,6 @@ const SpriteFunction = () =>
             this.props.progress = 0;
           }
           break;
-        case "Hub-n":
-          const now = Tone.now();
-          this.props.synth.releaseAll();
-          this.props.synth.triggerAttackRelease("G4", "8n", now);
-          this.props.synth.triggerAttackRelease("C4", "8n", now + 0.4);
-          this.props.synth.triggerAttackRelease("E4", "8n", now + 0.8);
-          this.props.synth.triggerAttackRelease("C4", "8n", now + 1.2);
-          this.props.synth.triggerAttackRelease("G4", "8n", now + 1.6);
-          break;
         default:
           break;
       }
@@ -91,10 +91,35 @@ const SpriteFunction = () =>
       if (!this.initialized) return;
       const ctx = this.context;
       if (!ctx) return;
+      // Outline
       ctx.save();
       ctx.fillStyle = "grey";
       ctx.fillRect(10, 10, 460, 460);
       ctx.restore();
+
+      if (this.roomKey !== "Hub-n") {
+        ctx.save();
+        ctx.fillStyle = "#030303";
+        ctx.beginPath();
+        ctx.arc(250, 250, 100, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillStyle = this.gameModel.state.potionSolved
+          ? "#ff0000"
+          : "#330000";
+        ctx.beginPath();
+        ctx.arc(240, 240, 100, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(120, 60, 250, 410);
+        ctx.fillStyle = this.gameModel.state.melodySolved
+          ? "#00aa00"
+          : "#aa0000";
+        ctx.fillRect(200, 120, 90, 20);
+        ctx.restore();
+      }
     },
   });
 

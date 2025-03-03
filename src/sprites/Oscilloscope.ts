@@ -1,6 +1,6 @@
 // hitting space plays the solution for 1s,
 // hitting buttons changes the pitch, wave type, and volume
-import { emit, keyPressed, Sprite } from "kontra";
+import { emit, Sprite } from "kontra";
 import { Solved } from "../data/sfx";
 import * as Tone from "tone";
 
@@ -17,6 +17,8 @@ const options: any[][] = [
 const SpriteFunction = () =>
   Sprite({
     name: "oscilloscope",
+    x: 160,
+    y: 0,
     props: {},
     update() {
       if (this.solved) return;
@@ -47,9 +49,6 @@ const SpriteFunction = () =>
 
         this.initialized = true;
       }
-      if (keyPressed(["space"])) {
-        // Interaction
-      }
       this.advance();
     },
     onExit() {
@@ -68,14 +67,12 @@ const SpriteFunction = () =>
       if (!this.gameModel.state.animalSolved) return;
       if (this.solved) return;
       if (index === 0) {
-        console.log("switching");
         this.props.oscSolution.start(0, 0).stop("+1");
         this.props.osc.stop().start("+1");
         return;
       }
       const optionIndex = index - 1;
       const selectedOption = this.props.state[optionIndex];
-      console.log(selectedOption);
       const selectedIndex = options[optionIndex].indexOf(selectedOption);
       const newSelectedIndex =
         (selectedIndex + 1) % options[optionIndex].length;

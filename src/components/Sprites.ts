@@ -138,7 +138,6 @@ export const MapSprite = (gameModel: GameModel) => {
         // Interact
         onKey(["space", "enter"], () => {
           this.interactInput(0);
-          console.log("space");
         });
         onKey(["1"], () => {
           this.interactInput(1);

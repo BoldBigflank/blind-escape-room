@@ -1,6 +1,6 @@
 // Each button flips two+ different positions
 // Flipping the button plays the new state
-import { emit, keyPressed, Sprite } from "kontra";
+import { emit, Sprite } from "kontra";
 import { Solved } from "../data/sfx";
 import { say } from "../data/utils";
 
@@ -24,21 +24,17 @@ const SpriteFunction = () =>
         this.props = { ...spriteProps };
         this.initialized = true;
       }
-      if (keyPressed(["space"])) {
-        // Interaction
-      }
       this.advance();
     },
-    onExit() {
-      // this.props.osc.stop();
-    },
-    onEnter() {
-      // if (this.props.osc && !this.solved) this.props.osc.start();
-    },
+    onExit() {},
+    onEnter() {},
     onInteract(index) {
-      if (index === 0) return;
+      if (index === 0) {
+        // Space bar
+        say(`${this.props.state.join(", ")}.`, true);
+        return;
+      }
       this.props.state[index - 1] = (this.props.state[index - 1] % 5) + 1;
-      console.log(this.props.state);
       if (this.props.state.every((v, i) => v === this.props.solution[i])) {
         Solved();
         emit("activate", "animalSolved");
@@ -53,6 +49,14 @@ const SpriteFunction = () =>
       ctx.save();
       ctx.fillStyle = "grey";
       ctx.fillRect(10, 10, 460, 460);
+      ctx.restore();
+      ctx.save();
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(50, 200, 380, 270);
+      ctx.fillStyle = this.solved ? "#00cc00" : "#ffffff";
+      ctx.font = "80px monospace";
+      ctx.textBaseline = "top";
+      ctx.fillText(this.props.state.join(" "), 125, 240);
       ctx.restore();
     },
   });

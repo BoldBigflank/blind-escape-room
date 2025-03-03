@@ -85,11 +85,17 @@ const SpriteFunction = () =>
       ctx.fillRect(10, 10, 460, 460);
       ctx.restore();
 
+      //
+      ctx.save();
+      ctx.fillStyle = "#00000";
+      ctx.fillRect(50, 75, 375, 150);
+      ctx.restore();
+
       // Lights
       ctx.save();
       this.props.complete.forEach((value, index) => {
         ctx.fillStyle = value ? "green" : "red";
-        ctx.fillRect(170 + index * 50, 220, 40, 40);
+        ctx.fillRect(75 + index * 125, 100, 75, 100);
       });
       ctx.restore();
     },

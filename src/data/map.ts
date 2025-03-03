@@ -24,97 +24,18 @@ export type Map = {
   title: string;
   rooms: Room[];
 };
-/* 
-const testMap = {
-  title: "test",
-  rooms: [
-    {
-      name: "lobby",
-      intro:
-        "You have arrived. Use the arrow keys to look around. Use space bar to interact.",
-      description: "This is the lobby.",
-      views: [
-        {
-          direction: "n" as CompassDirection,
-          description: "A door to the kitchen.",
-          interaction: [
-            {
-              condition: "kitchenDoor",
-              message: "You walk through the open door.",
-              action: "moveTo_kitchen",
-            },
-            {
-              message: "It's locked!",
-            },
-          ],
-        },
-        {
-          direction: "e" as CompassDirection,
-          description: "A flower with a delightful scent on a table.",
-          interaction: [
-            {
-              condition: "kitchenDoor",
-              message: "The button is pressed. What door opened?",
-            },
-            {
-              message: "You find a hidden button and press it. A door opens.",
-              action: "activate_kitchenDoor",
-            },
-          ],
-        },
-        {
-          direction: "s" as CompassDirection,
-          description: "A locked door to the outside.",
-        },
-        {
-          direction: "w" as CompassDirection,
-          description: "A mirror, which isn't too helpful.",
-        },
-      ],
-    },
-    {
-      name: "kitchen",
-      intro: "You walk into the kitchen",
-      description: "This is the kitchen.",
-      views: [
-        {
-          direction: "n" as CompassDirection,
-          description: "Some pots and pans on a counter.",
-        },
-        {
-          direction: "e" as CompassDirection,
-          description: "A gas stove.",
-          puzzle: "redLight",
-        },
-        {
-          direction: "s" as CompassDirection,
-          interaction: [
-            {
-              action: "moveTo_lobby",
-            },
-          ],
-          description: "There is a door to the lobby.",
-        },
-        {
-          direction: "w" as CompassDirection,
-          description: "A large sink.",
-        },
-      ],
-    },
-  ],
-} as Map;
- */
+
 const LaboratoryMap = {
   title: "laboratory",
   rooms: [
     {
       name: "Start",
-      intro: "Start",
-      description: "Start",
+      intro: "You wake up in a closet.",
+      description: "The closet.",
       views: [
         {
           direction: "n" as CompassDirection,
-          description: "Melody1",
+          description: "A small button on the north wall.",
           puzzle: "melody",
           interaction: [
             {
@@ -126,13 +47,13 @@ const LaboratoryMap = {
               message: "Press 1 to play a tone.",
             },
             {
-              message: "There's no noticeable effect.",
+              message: "It doesn't seem to be working.",
             },
           ],
         },
         {
           direction: "e" as CompassDirection,
-          description: "The door to the Hub",
+          description: "The door to the laboratory.",
           interaction: [
             {
               action: "moveTo_Hub",
@@ -141,7 +62,7 @@ const LaboratoryMap = {
         },
         {
           direction: "s" as CompassDirection,
-          description: "Melody3",
+          description: "A small button on the south wall.",
           puzzle: "melody",
           interaction: [
             {
@@ -153,13 +74,13 @@ const LaboratoryMap = {
               message: "Press 1 to play a tone.",
             },
             {
-              message: "There's no noticeable effect.",
+              message: "It doesn't seem to be working.",
             },
           ],
         },
         {
           direction: "w" as CompassDirection,
-          description: "Melody2",
+          description: "A small button on the west wall.",
           puzzle: "melody",
           interaction: [
             {
@@ -171,7 +92,7 @@ const LaboratoryMap = {
               message: "Press 1 to play a tone.",
             },
             {
-              message: "There's no noticeable effect.",
+              message: "It doesn't seem to be working.",
             },
           ],
         },
@@ -179,8 +100,9 @@ const LaboratoryMap = {
     },
     {
       name: "Hub",
-      intro: "Hub",
-      description: "Hub",
+      intro:
+        "The laboratory is brightly lit and furnished with everything a mad scientist could want.",
+      description: "The laboratory.",
       views: [
         {
           direction: "n" as CompassDirection,
@@ -193,13 +115,13 @@ const LaboratoryMap = {
               action: "moveTo_Animal1",
             },
             {
-              message: "The door won't budge.",
+              message: "The door is very locked.",
             },
           ],
         },
         {
           direction: "e" as CompassDirection,
-          description: "A Computer",
+          description: "A computer sits silently on the wall.",
           puzzle: "boot",
           interaction: [
             {
@@ -213,7 +135,8 @@ const LaboratoryMap = {
             },
             {
               condition: "animalSolved",
-              message: "The computer is ready to boot.",
+              message:
+                "A label reading 'boot sequence' sits above three switches. Press 1, 2, and 3 to interact with the boot sequence.",
             },
             {
               message: "The computer is not powered.",
@@ -222,8 +145,6 @@ const LaboratoryMap = {
         },
         {
           direction: "s" as CompassDirection,
-          intro:
-            "A potion labeled Sensory Enhancer sits on a table. It has a warning that it must be slowly heated first.",
           description: "A potion in front of a suspicious wall.",
           puzzle: "redLight",
           interaction: [
@@ -236,13 +157,14 @@ const LaboratoryMap = {
               message: "The potion is consumed.",
             },
             {
-              message: "Hold 1 to add heat to the potion.",
+              message:
+                "A potion labeled Sensory Enhancer sits on a table. It has a warning that it must be slowly heated first. Hold 1 to add heat to the potion.",
             },
           ],
         },
         {
           direction: "w" as CompassDirection,
-          description: "A door to the Start",
+          description: "The closet door.",
           interaction: [
             {
               action: "moveTo_Start",
@@ -253,12 +175,13 @@ const LaboratoryMap = {
     },
     {
       name: "CPU",
-      intro: "CPU",
-      description: "CPU",
+      intro: "The computer shows two wavy lines that currently do not overlap.",
+      description: "The computer shows an oscilloscope with two inputs.",
       views: [
         {
           direction: "n" as CompassDirection,
-          description: "An Oscilloscope.",
+          description:
+            "Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
           puzzle: "oscilloscope",
           interaction: [
             {
@@ -269,7 +192,8 @@ const LaboratoryMap = {
         },
         {
           direction: "e" as CompassDirection,
-          description: "An Oscilloscope.",
+          description:
+            "Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
           puzzle: "oscilloscope",
           interaction: [
             {
@@ -281,7 +205,8 @@ const LaboratoryMap = {
         {
           direction: "s" as CompassDirection,
           puzzle: "oscilloscope",
-          description: "An Oscilloscope.",
+          description:
+            "Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
           interaction: [
             {
               condition: "cpuSolved",
@@ -291,7 +216,7 @@ const LaboratoryMap = {
         },
         {
           direction: "w" as CompassDirection,
-          description: "Exit the computer",
+          description: "Exit.",
           interaction: [
             {
               action: "moveTo_Hub",
@@ -316,16 +241,16 @@ const LaboratoryMap = {
         },
         {
           direction: "e" as CompassDirection,
-          description: "A sign showing wind, earth, and water",
+          description: "A sign showing wind, earth, and water.",
           interaction: [
             {
-              message: "DefaultInteraction",
+              message: "A sign showing wind, earth, and water.",
             },
           ],
         },
         {
           direction: "s" as CompassDirection,
-          description: "A door to the Hub",
+          description: "A door to the laboratory",
           interaction: [
             {
               action: "moveTo_Hub",
@@ -335,11 +260,7 @@ const LaboratoryMap = {
         {
           direction: "w" as CompassDirection,
           description: "An eagle says caw, caw, caw.",
-          interaction: [
-            {
-              message: "DefaultInteraction",
-            },
-          ],
+          interaction: [],
         },
       ],
     },
@@ -362,11 +283,7 @@ const LaboratoryMap = {
         {
           direction: "e" as CompassDirection,
           description: "A fish says blub blub.",
-          interaction: [
-            {
-              message: "DefaultInteraction",
-            },
-          ],
+          interaction: [],
         },
         {
           direction: "s" as CompassDirection,
@@ -380,23 +297,24 @@ const LaboratoryMap = {
         {
           direction: "w" as CompassDirection,
           description: "A chimpanzee says ooh ooh eeh eeh.",
-          interaction: [
-            {
-              message: "DefaultInteraction",
-            },
-          ],
+          interaction: [],
         },
       ],
     },
     {
       name: "Combo",
-      intro: "Combo",
-      description: "Combo",
+      intro:
+        "An elevator with an electronic lock that won't run until all the switches are set high.",
+      description: "The elevator.",
       views: [
         {
           direction: "n" as CompassDirection,
-          description: "A door to the Hub",
+          description: "The elevator door.",
           interaction: [
+            {
+              condition: "comboSolved",
+              action: "moveTo_End",
+            },
             {
               action: "moveTo_Hub",
             },
@@ -404,38 +322,43 @@ const LaboratoryMap = {
         },
         {
           direction: "e" as CompassDirection,
-          description: "A series of buttons",
+          description: "Three buttons on the east wall.",
           puzzle: "combo",
           interaction: [
             {
-              message: "DefaultInteraction",
+              condition: "comboSolved",
+              message:
+                "You have set the combination. The elevator has started moving.",
+            },
+            {
+              message:
+                "Each button changes two switches. Press 1, 2, 3, to interact with each of three buttons.",
             },
           ],
         },
         {
           direction: "s" as CompassDirection,
-          description: "A door",
+          description: "The back of the elevator.",
           interaction: [
             {
-              condition: "comboSolved",
-              action: "moveTo_End",
-            },
-            {
-              message: "The exit door.",
+              message:
+                "There is a cute poster of a kitten hanging on a tree branch.",
             },
           ],
         },
         {
           direction: "w" as CompassDirection,
-          description: "A series of buttons",
+          description: "Three buttons on the west wall.",
           puzzle: "combo",
           interaction: [
             {
               condition: "comboSolved",
-              message: "You have set the combination.",
+              message:
+                "You have set the combination. The elevator has started moving.",
             },
             {
-              message: "Three buttons.",
+              message:
+                "Each button changes two switches. Press 1, 2, 3, to interact with each of three buttons.",
             },
           ],
         },
@@ -443,44 +366,29 @@ const LaboratoryMap = {
     },
     {
       name: "End",
-      intro: "You made it to the end.",
-      description: "End",
+      intro: "The elevator door opens to the outside. You have escaped!",
+      description: "The end.",
       views: [
         {
           direction: "n" as CompassDirection,
-          description: "A door to the Combo room",
-          interaction: [
-            {
-              action: "moveTo_Combo",
-            },
-          ],
+          description: "This game was made by Alex Swan.",
+          interaction: [],
         },
         {
           direction: "e" as CompassDirection,
-          description: "ViewDescription",
-          interaction: [
-            {
-              message: "DefaultInteraction",
-            },
-          ],
+          description:
+            "This game was made for the Games for Blind Gamers 4 Jam.",
+          interaction: [],
         },
         {
           direction: "s" as CompassDirection,
-          description: "ViewDescription",
-          interaction: [
-            {
-              message: "DefaultInteraction",
-            },
-          ],
+          description: "Thank you for playing!",
+          interaction: [],
         },
         {
           direction: "w" as CompassDirection,
-          description: "ViewDescription",
-          interaction: [
-            {
-              message: "DefaultInteraction",
-            },
-          ],
+          description: "You are free!",
+          interaction: [],
         },
       ],
     },
