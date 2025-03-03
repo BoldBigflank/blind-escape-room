@@ -95,26 +95,26 @@ const SpriteFunction = () =>
       // Outline
       ctx.save();
       ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 460);
+      ctx.fillRect(10, 10, 460, 380);
       ctx.restore();
 
       if (this.roomKey !== "Hub-n") {
         ctx.save();
         ctx.fillStyle = "#030303";
         ctx.beginPath();
-        ctx.arc(250, 250, 100, 0, 2 * Math.PI);
+        ctx.arc(250, 210, 100, 0, 2 * Math.PI);
         ctx.fill();
         ctx.fillStyle = this.gameModel.state.potionSolved
           ? "#ff0000"
           : "#330000";
         ctx.beginPath();
-        ctx.arc(240, 240, 100, 0, 2 * Math.PI);
+        ctx.arc(240, 200, 100, 0, 2 * Math.PI);
         ctx.fill();
         ctx.restore();
       } else {
         ctx.save();
         ctx.fillStyle = "#000000";
-        ctx.fillRect(120, 60, 250, 410);
+        ctx.fillRect(120, 60, 250, 330);
         ctx.fillStyle = this.gameModel.state.melodySolved
           ? "#00aa00"
           : "#aa0000";

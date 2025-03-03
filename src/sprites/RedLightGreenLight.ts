@@ -79,6 +79,7 @@ export const RedLight = () => {
       this.props.osc.stop();
     },
     onEnter() {
+      if (this.update) this.update(0);
       if (this.props.osc && !this.solved) this.props.osc.start();
     },
     render() {
@@ -87,7 +88,7 @@ export const RedLight = () => {
       if (!ctx) return;
       ctx.save();
       ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 460);
+      ctx.fillRect(10, 10, 460, 380);
       ctx.restore();
 
       // Tube

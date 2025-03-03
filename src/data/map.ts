@@ -136,7 +136,7 @@ const LaboratoryMap = {
             {
               condition: "animalSolved",
               message:
-                "A label reading 'boot sequence' sits above three switches. Press 1, 2, and 3 to interact with the boot sequence.",
+                "The label says 'boot sequence sync'. Press 1, 2, and 3 to interact with the boot sequence.",
             },
             {
               message: "The computer is not powered.",
@@ -158,7 +158,7 @@ const LaboratoryMap = {
             },
             {
               message:
-                "A potion labeled Sensory Enhancer sits on a table. It has a warning that it must be slowly heated first. Hold 1 to add heat to the potion.",
+                "The label says Warning: Sensory Enhancer potion must be heated slowly. Hold 1 to add heat.",
             },
           ],
         },
@@ -175,9 +175,9 @@ const LaboratoryMap = {
     },
     {
       name: "CPU",
-      intro: "The computer shows two wavy lines that currently do not overlap.",
-      description:
-        "The computer shows an oscilloscope with two inputs. Press 1, 2, 3 to change the pitch, wave and amplitude. Hit space to hear the target wave.",
+      description: "The computer shows two wavy lines.",
+      intro:
+        "The computer has three knobs and shows two waves. Press 1, 2, 3 to change the first wave. Hit space to hear the target wave.",
       views: [
         {
           direction: "n" as CompassDirection,

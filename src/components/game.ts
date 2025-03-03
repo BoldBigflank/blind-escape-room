@@ -1,4 +1,11 @@
-import { init, Sprite, GameLoop, initGamepad, initKeys } from "kontra";
+import {
+  init,
+  Sprite,
+  GameLoop,
+  initGamepad,
+  initKeys,
+  initPointer,
+} from "kontra";
 import { MapSprite } from "./Sprites";
 import { GameModel } from "./GameModel";
 
@@ -9,9 +16,9 @@ export const initGame = () => {
   const gameModel = new GameModel(); // Model/controller
   // let { canvas, context } = init()
   init();
+  initPointer();
 
   const sprites: Sprite[] = [];
-
   sprites.push(MapSprite(gameModel)); // View
 
   let loop = GameLoop({

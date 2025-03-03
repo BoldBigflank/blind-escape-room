@@ -91,7 +91,7 @@ const SpriteFunction = () =>
       // Background
       ctx.save();
       ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 460);
+      ctx.fillRect(10, 10, 460, 380);
       ctx.restore();
 
       ctx.save();

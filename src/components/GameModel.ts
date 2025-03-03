@@ -17,6 +17,8 @@ export class GameModel {
   puzzle: "";
   visitedRooms: string[];
   state: Record<string, any>;
+  message: string;
+  tts: boolean;
 
   constructor() {
     this.map = map;
@@ -24,6 +26,8 @@ export class GameModel {
     this.puzzle = "";
     this.visitedRooms = [];
     this.state = {};
+    this.message = "";
+    this.tts = false; // TODO: Get from localstorage
     this.moveTo(this.map.rooms[0].name);
     on("activate", (variable: string) => {
       this.state[variable] = true;
@@ -46,11 +50,18 @@ export class GameModel {
     return this.map.rooms.find((r) => r.name === name);
   }
 
+  shareMessage(text: string | undefined, interrupting?: boolean) {
+    if (!text) return;
+    this.message = text;
+    const tts = localStorage.getItem("dr-swan-lab-tts") === "true";
+    say(text, interrupting, tts);
+  }
+
   moveTo(name: string) {
     this.position = name;
     this.facing = "";
     if (!this.visitedRooms.includes(this.position)) {
-      say(this.currentRoom?.intro);
+      this.shareMessage(this.currentRoom?.intro);
       this.visitedRooms.push(this.position);
     } else {
       this.inspect();
@@ -63,9 +74,10 @@ export class GameModel {
   }
 
   inspect() {
-    if (this.facing === "") say(this.currentRoom?.description, true);
+    if (this.facing === "")
+      this.shareMessage(this.currentRoom?.description, true);
     else {
-      say(this.currentView?.description, true);
+      this.shareMessage(this.currentView?.description, true);
     }
   }
 
@@ -93,7 +105,7 @@ export class GameModel {
         if (!this.state[option.condition]) continue;
       }
       if (option.message) {
-        say(option.message);
+        this.shareMessage(option.message);
       }
       if (option.action) {
         this.action(option.action);

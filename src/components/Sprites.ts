@@ -194,14 +194,40 @@ export const MapSprite = (gameModel: GameModel) => {
     },
     render() {
       if (!this.context) return;
+      if (!gameModel) return;
       this.context.save();
       this.context.fillStyle = "black";
-      this.context.font = "12px mono";
-      this.context.fillRect(160, 0, 480, 480);
+      this.context.fillRect(160, 0, 480, 400);
+      this.context.restore();
+
+      this.context.save();
+      this.context.fillStyle = "#303030";
+      this.context.fillRect(0, 400, 640, 80);
+      this.context.fillStyle = "white";
+      this.context.textBaseline = "top";
+      if (gameModel.message !== undefined) {
+        this.context.font = `${gameModel.message.length > 110 ? 18 : 24}px monospace`;
+        if (this.context.measureText(gameModel.message).width < 600) {
+          this.context.fillText(gameModel.message || "", 10, 410);
+        } else {
+          const breakpoint = gameModel.message
+            .substring(0, Math.floor(gameModel.message.length / 2) + 1)
+            .lastIndexOf(" ");
+          this.context.fillText(
+            gameModel.message.substring(0, breakpoint) || "",
+            10,
+            410,
+          );
+          this.context.fillText(
+            gameModel.message.substring(breakpoint + 1) || "",
+            10,
+            444,
+          );
+        }
+      }
       this.context.restore();
 
       if (this.currentPuzzle) this.currentPuzzle.render();
-      // this.draw();
     },
   });
 };
