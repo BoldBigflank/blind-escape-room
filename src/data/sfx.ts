@@ -1,6 +1,7 @@
 import * as Tone from "tone";
 
-const synth = new Tone.Synth().toDestination();
+const vol = new Tone.Volume(-25).toDestination();
+const synth = new Tone.Synth().toDestination().connect(vol);
 export const Wrong = () => synth.triggerAttackRelease("G3", "16n");
 export const Blip = () => synth.triggerAttackRelease("C4", "16n");
 export const Ding = () => synth.triggerAttackRelease("G4", "16n");
@@ -16,7 +17,7 @@ export const Solved = () => {
 
 export const Buzz = () => synth.triggerAttackRelease("G2", "32n");
 
-const melodySynth = new Tone.PolySynth(Tone.Synth).toDestination();
+const melodySynth = new Tone.PolySynth(Tone.Synth).toDestination().connect(vol);
 export const MelodyTune = () => {
   const now = Tone.now();
   melodySynth.releaseAll();
@@ -27,7 +28,6 @@ export const MelodyTune = () => {
   melodySynth.triggerAttackRelease("G4", "8n", now + 1.6);
 };
 
-// const osc = new Tone.Oscillator(440, "sine").toDestination().start();
 export const toneLerp = (start, end, interval) => {
   if (end < start) {
     return lerp(end, start, easeInQuad(1 - interval));
