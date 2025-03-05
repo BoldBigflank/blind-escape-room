@@ -238,40 +238,94 @@ export const MapSprite = (gameModel: GameModel) => {
       }
     },
     render() {
-      if (!this.context) return;
-      if (!gameModel) return;
-      this.context.save();
-      this.context.fillStyle = "black";
-      this.context.fillRect(160, 0, 480, 400);
-      this.context.restore();
+      const ctx = this.context;
+      if (!ctx || !gameModel) return;
 
-      this.context.save();
-      this.context.fillStyle = "#303030";
-      this.context.fillRect(0, 400, 640, 80);
-      this.context.fillStyle = "white";
-      this.context.textBaseline = "top";
+      // Draw main game area background
+      ctx.save();
+      ctx.fillStyle = "black";
+      ctx.fillRect(160, 0, 480, 400);
+      ctx.restore();
+
+      // Draw message area
+      ctx.save();
+      ctx.fillStyle = "#303030";
+      ctx.fillRect(0, 400, 640, 80);
+
+      // Render message text if present
       if (gameModel.message !== undefined) {
-        this.context.font = `${gameModel.message.length > 110 ? 18 : 24}px monospace`;
-        if (this.context.measureText(gameModel.message).width < 600) {
-          this.context.fillText(gameModel.message || "", 10, 410);
-        } else {
-          const breakpoint = gameModel.message
-            .substring(0, Math.floor(gameModel.message.length / 2) + 1)
-            .lastIndexOf(" ");
-          this.context.fillText(
-            gameModel.message.substring(0, breakpoint) || "",
-            10,
-            410,
-          );
-          this.context.fillText(
-            gameModel.message.substring(breakpoint + 1) || "",
-            10,
-            444,
-          );
-        }
-      }
-      this.context.restore();
+        ctx.fillStyle = "white";
+        ctx.textBaseline = "top";
+        
+        const maxWidth = 620; // Available width for text
+        const maxHeight = 60; // Available height for text
+        const words = gameModel.message.split(" ");
+        const lines: string[] = [];
+        let currentLine = words[0];
 
+        // Try to fit all words in one line first
+        for (let i = 1; i < words.length; i++) {
+          const width = ctx.measureText(currentLine + " " + words[i]).width;
+          if (width < maxWidth) {
+            currentLine += " " + words[i];
+          } else {
+            // If we can't fit in one line, split into two lines
+            lines.push(currentLine);
+            currentLine = words[i];
+            // Add remaining words to second line
+            for (let j = i + 1; j < words.length; j++) {
+              currentLine += " " + words[j];
+            }
+            break;
+          }
+        }
+        if (lines.length === 0) {
+          lines.push(currentLine);
+        } else {
+          lines.push(currentLine);
+        }
+
+        // Set font size based on number of lines
+        let fontSize = 20; // Default size
+        ctx.font = `${fontSize}px monospace`;
+        
+        // Check if single line fits at default size
+        if (lines.length === 1) {
+          const width = ctx.measureText(lines[0]).width;
+          if (width > maxWidth) {
+            // If single line doesn't fit, split into two lines
+            const midPoint = Math.floor(words.length / 2);
+            lines[0] = words.slice(0, midPoint).join(" ");
+            lines[1] = words.slice(midPoint).join(" ");
+          }
+        }
+        
+        // Scale down if we have two lines
+        if (lines.length > 1) {
+          // Find the widest line
+          const maxLineWidth = Math.max(...lines.map(line => 
+            ctx.measureText(line).width
+          ));
+          
+          // Calculate font size ratio to fit width
+          if (maxLineWidth > maxWidth) {
+            fontSize = Math.floor(fontSize * (maxWidth / maxLineWidth));
+            // Ensure we don't go below minimum size
+            fontSize = Math.max(fontSize, 12);
+          }
+        }
+
+        // Set the calculated font size
+        ctx.font = `${fontSize}px monospace`;
+
+        // Render all lines
+        lines.forEach((line, index) => {
+          ctx.fillText(line, 10, 410 + (index * (maxHeight/lines.length)));
+        });
+      }
+      ctx.restore();
+
+      // Render game components
       if (this.imageSprite) this.imageSprite.render();
       if (this.currentPuzzle) this.currentPuzzle.render();
     },
