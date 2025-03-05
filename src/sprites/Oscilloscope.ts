@@ -5,13 +5,13 @@ import { Solved } from "../data/sfx";
 import * as Tone from "tone";
 
 const spriteProps = {
-  solution: ["F4", "triangle", -26],
-  state: ["C4", "sine", -20],
+  solution: ["F4", "triangle", -6],
+  state: ["C4", "sine", 0],
 };
 const options: any[][] = [
   ["C4", "D4", "E4", "F4", "G4"],
   ["triangle", "sine", "square"],
-  [-20, -23, -26, -29],
+  [0, -3, -6, -9],
 ];
 
 const SpriteFunction = () =>

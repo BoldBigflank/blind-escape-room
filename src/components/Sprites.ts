@@ -1,4 +1,4 @@
-import { load, onGamepad, onKey, setImagePath, Sprite } from "kontra";
+import { load, onGamepad, onKey, Sprite } from "kontra";
 import { GameModel } from "./GameModel";
 import { CompassDirection, Room } from "../data/map";
 import { RedLight } from "../sprites/RedLightGreenLight";
@@ -144,7 +144,6 @@ export const MapSprite = (gameModel: GameModel) => {
         };
         traverseRoom(gameModel.map.rooms[0], 0, 0);
 
-        setImagePath("public/");
         load(...imageNames.map((p) => p + ".png")).then((assets) => {
           this.assets = assets.map((image, index) => {
             return {

@@ -24,7 +24,14 @@ export class GameModel {
     this.facing = "";
     this.puzzle = "";
     this.visitedRooms = [];
-    this.state = {};
+    this.state = {
+      // potionSolved: true,
+      // melodySolved: true,
+      // animalSolved: true,
+      // bootSolved: true,
+      // cpuSolved: true,
+      // comboSolved: true,
+    };
     this.message = "";
     this.moveTo(this.map.rooms[0].name);
     on("activate", (variable: string) => {
