@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build-prod": "tsc && vite build --base=/blind-escape-room/",
-    "build-itch": "tsc && vite build --base=",
     "preview": "vite preview"
   },
   "devDependencies": {
