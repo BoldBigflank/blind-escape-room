@@ -1,4 +1,4 @@
-import { onGamepad, onKey, Sprite } from "kontra";
+import { load, onGamepad, onKey, setImagePath, Sprite } from "kontra";
 import { GameModel } from "./GameModel";
 import { CompassDirection, Room } from "../data/map";
 import { RedLight } from "../sprites/RedLightGreenLight";
@@ -13,14 +13,30 @@ const ROOM_PADDING = 8;
 const MAP_OFFSET_X = 0;
 const MAP_OFFSET_Y = 200;
 
+const ImageSprite = (image) =>
+  Sprite({
+    x: 170,
+    y: 10,
+    anchor: { x: 0, y: 0 },
+    image,
+    render() {
+      const ctx = this.context;
+      if (!ctx) return;
+      ctx.save();
+      ctx.scale(2, 2);
+      this.draw();
+      ctx.restore();
+    },
+  });
+
 const RoomSprite = () =>
   Sprite({
     width: ROOM_SIZE,
     height: ROOM_SIZE,
-    color: "blue",
     update(dt) {
       if (!this.gameModel) return;
-      this.color = this.gameModel.position === this.name ? "blue" : "white";
+      this.color =
+        this.gameModel.position === this.name ? "#3fe4e4" : "#808080";
       this.advance(dt);
     },
     render() {
@@ -43,7 +59,7 @@ const RoomSprite = () =>
 
         if (this.context) {
           this.context.save();
-          this.context.fillStyle = "green";
+          this.context.fillStyle = "white";
           this.context.fillRect(offsetX, offsetY, 8, 8);
           this.context.restore();
         }
@@ -76,6 +92,7 @@ export const MapSprite = (gameModel: GameModel) => {
     update(dt) {
       if (!this.initialized) {
         const initializedRooms: string[] = [];
+        const imageNames: string[] = [];
         const traverseRoom = (
           currentRoom: Room | undefined,
           x: number,
@@ -114,10 +131,32 @@ export const MapSprite = (gameModel: GameModel) => {
                   traverseRoom(gameModel.roomByName(connectsTo), newX, newY);
                 });
               }
+              // Find the images to load
+              if (v.image !== undefined) {
+                v.image.forEach((ic) => {
+                  if (!imageNames.includes(ic.path)) {
+                    imageNames.push(ic.path);
+                  }
+                });
+              }
             });
           }
         };
         traverseRoom(gameModel.map.rooms[0], 0, 0);
+
+        setImagePath("public/");
+        load(...imageNames.map((p) => p + ".png")).then((assets) => {
+          this.assets = assets.map((image, index) => {
+            return {
+              image,
+              path: imageNames[index],
+            };
+          });
+          this.imageSprite = ImageSprite(
+            this.assets.find((a) => a.path === gameModel.currentImage).image,
+          );
+          // this.addChild(this.imageSprite);
+        });
 
         // Inspect
         onKey(["w", "arrowup"], () => {
@@ -191,6 +230,13 @@ export const MapSprite = (gameModel: GameModel) => {
         }
       }
       if (this.currentPuzzle) this.currentPuzzle.update(dt);
+      if (this.assets) {
+        const currentImage = gameModel.currentImage;
+        this.imageSprite.image = this.assets.find(
+          (a) => a.path === currentImage,
+        ).image;
+        this.imageSprite.update();
+      }
     },
     render() {
       if (!this.context) return;
@@ -227,6 +273,7 @@ export const MapSprite = (gameModel: GameModel) => {
       }
       this.context.restore();
 
+      if (this.imageSprite) this.imageSprite.render();
       if (this.currentPuzzle) this.currentPuzzle.render();
     },
   });

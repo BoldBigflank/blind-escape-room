@@ -87,3 +87,38 @@ You wake up in a strange laboratory.
     - Three/four identical buttons that need to be pressed in order. The button hums when it's its turn
 
 One of the puzzles should make use of the compass directions, so it matters where the rooms go.
+
+# Scenes To Draw
+
+* Melody button (Start-n/e/s)
+    - Unactivated
+    - Activated (show note)
+* Closet door (Start-e/Hub-w)
+* Melody Door (Hub-n/Animal1-s)
+    - Locked
+    - Unlocked
+* Computer (Hub-e/CPU-w)
+    - Off
+    - Boot puzzle
+    - Active
+* Potion/Elevator (Hub-s)
+    - Potion Puzzle
+    - Potion complete
+    - Elevator door open
+* Oscilloscope (CPU-n/e/s)
+    - Unsolved
+    - Solved
+* Animal1
+    - Poster
+    - Eagle
+* Animal2
+    - Chimp
+    - Fish
+    - Generator
+* Combo
+    - Elevator w/o potion
+    - Switches1/2
+    - Hang In There poster
+* End
+    - Elevator
+    - Credits 1/2/3

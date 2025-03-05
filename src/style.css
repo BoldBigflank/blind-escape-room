@@ -110,7 +110,7 @@ canvas {
   left: 0;
   right: 0;
   bottom: 0; */
-  background-color: #535bf2;
+  background-color: #000000;
 }
 
 .visually-hidden:not(:focus):not(:active) {

@@ -1,5 +1,6 @@
 import "./style.css";
 import { initGame } from "./components/game.ts";
+import { getStoreItem, setStoreItem } from "kontra";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
@@ -33,16 +34,12 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
 window.addEventListener("DOMContentLoaded", () => {
   const ttsStorageKey = "dr-swan-lab-tts";
-  // Checkbox localstorage
-  const tts = localStorage.getItem(ttsStorageKey);
+  const tts = getStoreItem(ttsStorageKey);
   const ttsElement = document.getElementById("tts") as HTMLInputElement;
   if (ttsElement) {
-    if (tts === "true") ttsElement.checked = true;
+    if (tts) ttsElement.checked = true;
     ttsElement.onclick = () => {
-      localStorage.setItem(
-        ttsStorageKey,
-        ttsElement.checked ? "true" : "false",
-      );
+      setStoreItem(ttsStorageKey, ttsElement.checked ? 1 : 0);
     };
   }
 

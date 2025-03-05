@@ -92,33 +92,13 @@ const SpriteFunction = () =>
       if (!this.initialized) return;
       const ctx = this.context;
       if (!ctx) return;
-      // Outline
-      ctx.save();
-      ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 380);
-      ctx.restore();
 
-      if (this.roomKey !== "Hub-n") {
+      if (this.roomKey === "Hub-n") {
         ctx.save();
-        ctx.fillStyle = "#030303";
-        ctx.beginPath();
-        ctx.arc(250, 210, 100, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.fillStyle = this.gameModel.state.potionSolved
-          ? "#ff0000"
-          : "#330000";
-        ctx.beginPath();
-        ctx.arc(240, 200, 100, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.restore();
-      } else {
-        ctx.save();
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(120, 60, 250, 330);
         ctx.fillStyle = this.gameModel.state.melodySolved
-          ? "#00aa00"
-          : "#aa0000";
-        ctx.fillRect(200, 120, 90, 20);
+          ? "#3fe43f"
+          : "#e43f3f";
+        ctx.fillRect(195, 115, 90, 30);
         ctx.restore();
       }
     },

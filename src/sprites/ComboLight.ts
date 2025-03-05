@@ -88,16 +88,12 @@ const SpriteFunction = () =>
       if (!this.initialized) return;
       const ctx = this.context;
       if (!ctx) return;
-      // Background
-      ctx.save();
-      ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 380);
-      ctx.restore();
-
       ctx.save();
       this.props.state.forEach((value, index) => {
-        ctx.fillStyle = value ? "green" : "red";
-        ctx.fillRect(21 + index * 92, 206, 69, 69);
+        ctx.fillStyle = value ? "#3fe43f" : "#e43f3f";
+        ctx.beginPath();
+        ctx.arc(35 * 2 + 10 + 80 * index, 65 * 2 + 10, 25, 0, 2 * Math.PI);
+        ctx.fill();
       });
       ctx.restore();
     },

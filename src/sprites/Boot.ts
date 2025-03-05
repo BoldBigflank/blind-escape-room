@@ -79,23 +79,11 @@ const SpriteFunction = () =>
       const ctx = this.context;
       if (!ctx) return;
 
-      // Background
-      ctx.save();
-      ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 380);
-      ctx.restore();
-
-      //
-      ctx.save();
-      ctx.fillStyle = "#00000";
-      ctx.fillRect(50, 75, 375, 150);
-      ctx.restore();
-
       // Lights
       ctx.save();
       this.props.complete.forEach((value, index) => {
-        ctx.fillStyle = value ? "green" : "red";
-        ctx.fillRect(75 + index * 125, 100, 75, 100);
+        ctx.fillStyle = value ? "#3fe43f" : "#e43f3f";
+        ctx.fillRect(154 * 2 + 10, 54 * 2 + 10 + 60 * index, 24, 24);
       });
       ctx.restore();
     },

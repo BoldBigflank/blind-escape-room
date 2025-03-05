@@ -47,16 +47,13 @@ const SpriteFunction = () =>
       const ctx = this.context;
       if (!ctx) return;
       ctx.save();
-      ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 380);
-      ctx.restore();
-      ctx.save();
-      ctx.fillStyle = "#000000";
-      ctx.fillRect(50, 120, 380, 270);
       ctx.fillStyle = this.solved ? "#00cc00" : "#ffffff";
-      ctx.font = "80px monospace";
+      ctx.font = "40px monospace";
       ctx.textBaseline = "top";
-      ctx.fillText(this.props.state.join(" "), 125, 240);
+      ctx.fillText(this.props.state[0], 120, 215);
+      ctx.fillText(this.props.state[1], 200, 215);
+      ctx.fillText(this.props.state[2], 280, 215);
+
       ctx.restore();
     },
   });

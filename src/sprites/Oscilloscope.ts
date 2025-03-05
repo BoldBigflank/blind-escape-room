@@ -96,12 +96,6 @@ const SpriteFunction = () =>
       if (!this.initialized) return;
       const ctx = this.context;
       if (!ctx) return;
-
-      // Background
-      ctx.save();
-      ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 380);
-      ctx.restore();
     },
   });
 

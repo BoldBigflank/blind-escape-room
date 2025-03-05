@@ -25,7 +25,6 @@ export const RedLight = () => {
         const vol = new Tone.Volume(-25).toDestination();
         this.props.osc = new Tone.Oscillator(440, "sine").connect(vol);
       }
-      this.color = this.props.state;
       if (this.props.progress > 0) this.props.target += dt! * 8;
       if (
         keyPressed(["1"]) ||
@@ -72,7 +71,6 @@ export const RedLight = () => {
           this.props.osc.stop();
         }
       }
-      this.color = this.props.state;
       this.advance();
     },
     onExit() {
@@ -84,43 +82,39 @@ export const RedLight = () => {
     },
     render() {
       if (!this.initialized) return;
+      if (this.solved) return;
       const ctx = this.context;
       if (!ctx) return;
-      ctx.save();
-      ctx.fillStyle = "grey";
-      ctx.fillRect(10, 10, 460, 380);
-      ctx.restore();
-
       // Tube
       ctx.save();
-      ctx.fillStyle = this.color as string;
-      ctx.fillRect(220, 80, 40, 210);
+      ctx.fillStyle = this.props.state === "orange" ? "#e4923f" : "#ffffff";
+      ctx.fillRect(340, 50, 40, 210);
       ctx.restore();
 
       // Bulb
       ctx.save();
-      ctx.fillStyle = this.color as string;
+      ctx.fillStyle = this.props.state === "orange" ? "#e4923f" : "#ffffff";
       ctx.beginPath();
-      ctx.arc(240, 290, 25, 0, 2 * Math.PI);
+      ctx.arc(360, 260, 25, 0, 2 * Math.PI);
       ctx.fill();
-      ctx.fillStyle = "red";
+      ctx.fillStyle = "#e43f3f";
       ctx.beginPath();
-      ctx.arc(240, 290, 15, 0, 2 * Math.PI);
+      ctx.arc(360, 260, 15, 0, 2 * Math.PI);
       ctx.fill();
       ctx.restore();
 
       // Progress bar
       const fillHeight = -2 * this.props.progress;
       ctx.save();
-      ctx.fillStyle = "red";
-      ctx.fillRect(227, 290, 26, fillHeight);
+      ctx.fillStyle = "#e43f3f";
+      ctx.fillRect(347, 260, 26, fillHeight);
       ctx.restore();
 
       // Target range
       const hightTarget = 2 * this.props.target + 10;
       ctx.save();
-      ctx.fillStyle = "black";
-      ctx.fillRect(225, 290 - hightTarget, 5, 20);
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(345, 260 - hightTarget, 5, 20);
       ctx.restore();
     },
   });

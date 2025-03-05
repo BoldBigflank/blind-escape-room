@@ -6,9 +6,15 @@ export type Interaction = {
   action?: string;
 };
 
+export type ImageCondition = {
+  path: string;
+  condition?: string;
+};
+
 export type View = {
   direction: CompassDirection;
   interaction: Interaction[];
+  image: ImageCondition[];
   description: string;
   puzzle?: string;
 };
@@ -37,6 +43,15 @@ const LaboratoryMap = {
           direction: "n" as CompassDirection,
           description: "A small button on the north wall.",
           puzzle: "melody",
+          image: [
+            {
+              condition: "potionSolved",
+              path: "melody-button",
+            },
+            {
+              path: "melody-button-blank",
+            },
+          ],
           interaction: [
             {
               condition: "melodySolved",
@@ -54,6 +69,11 @@ const LaboratoryMap = {
         {
           direction: "e" as CompassDirection,
           description: "The door to the laboratory.",
+          image: [
+            {
+              path: "closet-door",
+            },
+          ],
           interaction: [
             {
               action: "moveTo_Hub",
@@ -64,6 +84,15 @@ const LaboratoryMap = {
           direction: "s" as CompassDirection,
           description: "A small button on the south wall.",
           puzzle: "melody",
+          image: [
+            {
+              condition: "potionSolved",
+              path: "melody-button",
+            },
+            {
+              path: "melody-button-blank",
+            },
+          ],
           interaction: [
             {
               condition: "melodySolved",
@@ -82,6 +111,15 @@ const LaboratoryMap = {
           direction: "w" as CompassDirection,
           description: "A small button on the west wall.",
           puzzle: "melody",
+          image: [
+            {
+              condition: "potionSolved",
+              path: "melody-button",
+            },
+            {
+              path: "melody-button-blank",
+            },
+          ],
           interaction: [
             {
               condition: "melodySolved",
@@ -108,6 +146,11 @@ const LaboratoryMap = {
           direction: "n" as CompassDirection,
           description: "The large door with an electronic lock.",
           puzzle: "melody",
+          image: [
+            {
+              path: "melody-door",
+            },
+          ],
           interaction: [
             {
               condition: "melodySolved",
@@ -123,6 +166,19 @@ const LaboratoryMap = {
           direction: "e" as CompassDirection,
           description: "A computer sits silently on the wall.",
           puzzle: "boot",
+          image: [
+            {
+              condition: "cpuSolved",
+              path: "cpu-active",
+            },
+            {
+              condition: "animalSolved",
+              path: "cpu-boot",
+            },
+            {
+              path: "cpu-off",
+            },
+          ],
           interaction: [
             {
               condition: "cpuSolved",
@@ -147,6 +203,19 @@ const LaboratoryMap = {
           direction: "s" as CompassDirection,
           description: "A potion in front of a suspicious wall.",
           puzzle: "redLight",
+          image: [
+            {
+              condition: "cpuSolved",
+              path: "potion-elevator",
+            },
+            {
+              condition: "potionSolved",
+              path: "potion-complete",
+            },
+            {
+              path: "potion-start",
+            },
+          ],
           interaction: [
             {
               condition: "cpuSolved",
@@ -165,6 +234,11 @@ const LaboratoryMap = {
         {
           direction: "w" as CompassDirection,
           description: "The closet door.",
+          image: [
+            {
+              path: "closet-door",
+            },
+          ],
           interaction: [
             {
               action: "moveTo_Start",
@@ -183,6 +257,15 @@ const LaboratoryMap = {
           direction: "n" as CompassDirection,
           description: "",
           puzzle: "oscilloscope",
+          image: [
+            {
+              condition: "cpuSolved",
+              path: "oscilloscope-solved",
+            },
+            {
+              path: "oscilloscope",
+            },
+          ],
           interaction: [
             {
               condition: "cpuSolved",
@@ -194,6 +277,15 @@ const LaboratoryMap = {
           direction: "e" as CompassDirection,
           description: "",
           puzzle: "oscilloscope",
+          image: [
+            {
+              condition: "cpuSolved",
+              path: "oscilloscope-solved",
+            },
+            {
+              path: "oscilloscope",
+            },
+          ],
           interaction: [
             {
               condition: "cpuSolved",
@@ -205,6 +297,15 @@ const LaboratoryMap = {
           direction: "s" as CompassDirection,
           puzzle: "oscilloscope",
           description: "",
+          image: [
+            {
+              condition: "cpuSolved",
+              path: "oscilloscope-solved",
+            },
+            {
+              path: "oscilloscope",
+            },
+          ],
           interaction: [
             {
               condition: "cpuSolved",
@@ -215,6 +316,11 @@ const LaboratoryMap = {
         {
           direction: "w" as CompassDirection,
           description: "Exit.",
+          image: [
+            {
+              path: "cpu-active",
+            },
+          ],
           interaction: [
             {
               action: "moveTo_Hub",
@@ -231,6 +337,11 @@ const LaboratoryMap = {
         {
           direction: "n" as CompassDirection,
           description: "The animal room continues",
+          image: [
+            {
+              path: "blank",
+            },
+          ],
           interaction: [
             {
               action: "moveTo_Animal2",
@@ -240,6 +351,11 @@ const LaboratoryMap = {
         {
           direction: "e" as CompassDirection,
           description: "A sign showing wind, earth, and water.",
+          image: [
+            {
+              path: "animal-poster",
+            },
+          ],
           interaction: [
             {
               message: "A sign showing wind, earth, and water.",
@@ -249,6 +365,11 @@ const LaboratoryMap = {
         {
           direction: "s" as CompassDirection,
           description: "A door to the laboratory",
+          image: [
+            {
+              path: "melody-door",
+            },
+          ],
           interaction: [
             {
               action: "moveTo_Hub",
@@ -258,6 +379,11 @@ const LaboratoryMap = {
         {
           direction: "w" as CompassDirection,
           description: "An eagle says caw, caw, caw.",
+          image: [
+            {
+              path: "animal-eagle",
+            },
+          ],
           interaction: [],
         },
       ],
@@ -271,6 +397,11 @@ const LaboratoryMap = {
           direction: "n" as CompassDirection,
           description: "A generator with a 3-button combination lock",
           puzzle: "animal",
+          image: [
+            {
+              path: "generator",
+            },
+          ],
           interaction: [
             {
               condition: "animalSolved",
@@ -281,11 +412,21 @@ const LaboratoryMap = {
         {
           direction: "e" as CompassDirection,
           description: "A fish says blub blub.",
+          image: [
+            {
+              path: "animal-fish",
+            },
+          ],
           interaction: [],
         },
         {
           direction: "s" as CompassDirection,
           description: "The animal room continues",
+          image: [
+            {
+              path: "blank",
+            },
+          ],
           interaction: [
             {
               action: "moveTo_Animal1",
@@ -295,6 +436,11 @@ const LaboratoryMap = {
         {
           direction: "w" as CompassDirection,
           description: "A chimpanzee says ooh ooh eeh eeh.",
+          image: [
+            {
+              path: "animal-chimp",
+            },
+          ],
           interaction: [],
         },
       ],
@@ -308,6 +454,11 @@ const LaboratoryMap = {
         {
           direction: "n" as CompassDirection,
           description: "The elevator door.",
+          image: [
+            {
+              path: "combo-elevator",
+            },
+          ],
           interaction: [
             {
               condition: "comboSolved",
@@ -320,8 +471,13 @@ const LaboratoryMap = {
         },
         {
           direction: "e" as CompassDirection,
-          description: "Three buttons on the east wall.",
+          description: "Three square buttons on the east wall.",
           puzzle: "combo",
+          image: [
+            {
+              path: "combo-buttons",
+            },
+          ],
           interaction: [
             {
               condition: "comboSolved",
@@ -337,6 +493,11 @@ const LaboratoryMap = {
         {
           direction: "s" as CompassDirection,
           description: "The back of the elevator.",
+          image: [
+            {
+              path: "combo-poster",
+            },
+          ],
           interaction: [
             {
               message:
@@ -346,8 +507,13 @@ const LaboratoryMap = {
         },
         {
           direction: "w" as CompassDirection,
-          description: "Three buttons on the west wall.",
+          description: "Three circular buttons on the west wall.",
           puzzle: "combo",
+          image: [
+            {
+              path: "combo-buttons2",
+            },
+          ],
           interaction: [
             {
               condition: "comboSolved",
@@ -370,22 +536,42 @@ const LaboratoryMap = {
         {
           direction: "n" as CompassDirection,
           description: "This game was made by Alex Swan.",
+          image: [
+            {
+              path: "end",
+            },
+          ],
           interaction: [],
         },
         {
           direction: "e" as CompassDirection,
           description:
             "This game was made for the Games for Blind Gamers 4 Jam.",
+          image: [
+            {
+              path: "end",
+            },
+          ],
           interaction: [],
         },
         {
           direction: "s" as CompassDirection,
           description: "Thank you for playing!",
+          image: [
+            {
+              path: "end",
+            },
+          ],
           interaction: [],
         },
         {
           direction: "w" as CompassDirection,
           description: "You are free!",
+          image: [
+            {
+              path: "end",
+            },
+          ],
           interaction: [],
         },
       ],

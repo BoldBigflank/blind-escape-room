@@ -8,7 +8,7 @@ import {
 } from "../data/map.ts";
 import { Blip } from "../data/sfx.ts";
 import { say } from "../data/utils.ts";
-import { on } from "kontra";
+import { getStoreItem, on } from "kontra";
 
 export class GameModel {
   map: Map;
@@ -18,7 +18,6 @@ export class GameModel {
   visitedRooms: string[];
   state: Record<string, any>;
   message: string;
-  tts: boolean;
 
   constructor() {
     this.map = map;
@@ -27,7 +26,6 @@ export class GameModel {
     this.visitedRooms = [];
     this.state = {};
     this.message = "";
-    this.tts = false; // TODO: Get from localstorage
     this.moveTo(this.map.rooms[0].name);
     on("activate", (variable: string) => {
       this.state[variable] = true;
@@ -42,6 +40,17 @@ export class GameModel {
     return this.currentRoom?.views.find((v) => v.direction == this.facing);
   }
 
+  public get currentImage(): string {
+    if (!this.currentView || !this.currentView.image) return "blank";
+    for (let i = 0; i < this.currentView.image.length; i++) {
+      const ic = this.currentView?.image[i];
+      if (!ic) continue;
+      if (!ic.condition) return ic.path;
+      if (this.state[ic.condition]) return ic.path;
+    }
+    return "blank";
+  }
+
   public get currentPuzzle(): string | undefined {
     return this.currentView?.puzzle;
   }
@@ -53,8 +62,8 @@ export class GameModel {
   shareMessage(text: string | undefined, interrupting?: boolean) {
     if (!text) return;
     this.message = text;
-    const tts = localStorage.getItem("dr-swan-lab-tts") === "true";
-    say(text, interrupting, tts);
+    const tts = getStoreItem("dr-swan-lab-tts");
+    say(text, interrupting, tts === 1);
   }
 
   moveTo(name: string) {
