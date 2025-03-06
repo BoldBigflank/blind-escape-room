@@ -85,8 +85,9 @@ export class GameModel {
   }
 
   lookAt(direction: CompassDirection) {
+    const shouldInspect = this.facing !== direction;
     this.facing = direction;
-    this.inspect();
+    if (shouldInspect) this.inspect();
   }
 
   inspect() {
