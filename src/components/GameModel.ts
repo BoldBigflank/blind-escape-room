@@ -71,8 +71,7 @@ export class GameModel {
   shareMessage(text: string | undefined, interrupting?: boolean) {
     if (!text) return;
     this.message = text;
-    const tts = getStoreItem("dr-swan-lab-tts");
-    say(text, interrupting, tts === 1);
+    say(text, interrupting);
   }
 
   moveTo(name: string) {

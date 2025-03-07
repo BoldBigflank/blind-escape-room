@@ -36,7 +36,7 @@ const SpriteFunction = () =>
       if (this.solved) return;
       if (index === 0) {
         // Space bar
-        say(`${this.props.state.join(", ")}.`, true, true);
+        say(`${this.props.state.join(", ")}.`, true);
         return;
       }
       this.props.state[index - 1] = (this.props.state[index - 1] % 5) + 1;
@@ -44,7 +44,7 @@ const SpriteFunction = () =>
         Solved();
         emit("activate", "animalSolved");
       } else {
-        say(`${this.props.state.join(", ")}.`, true, true);
+        say(`${this.props.state.join(", ")}.`, true);
       }
     },
     render() {

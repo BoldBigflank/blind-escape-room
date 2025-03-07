@@ -227,7 +227,7 @@ const LaboratoryMap = {
             },
             {
               message:
-                "The label says Warning: Sensory Enhancer potion must be heated slowly. Hold 1 to add heat.",
+                "The label says: Sensory Enhancer potion. Hold 1 to add heat, stop to cool. Too fast or too slow will ruin the potion.",
             },
           ],
         },

@@ -1,10 +1,12 @@
 import { keyPressed, Sprite, emit, clamp, gamepadPressed } from "kontra";
 import * as Tone from "tone";
 import { Solved, Wrong, toneLerp } from "../data/sfx";
+import { hexColorLerp, say } from "../data/utils";
 
 const redLightProps = {
   state: "white", // orange, red, green
   progress: 0,
+  ignoreInput: 1,
   buffer: 10,
   target: 0,
   trouble: false,
@@ -29,11 +31,13 @@ export const RedLight = () => {
       }
       if (this.solved) return;
       if (this.props.progress > 0) this.props.target += dt! * 8;
-      if (
-        keyPressed(["1"]) ||
-        gamepadPressed("north") ||
-        gamepadPressed("west") ||
-        gamepadPressed("east")
+      this.props.ignoreInput = Math.max(0, this.props.ignoreInput - dt!);
+      if (!this.props.ignoreInput && (
+          keyPressed(["1"]) ||
+          gamepadPressed("north") ||
+          gamepadPressed("west") ||
+          gamepadPressed("east")
+        )
       ) {
         this.props.osc.start();
         this.props.progress += dt! * 12;
@@ -65,10 +69,16 @@ export const RedLight = () => {
         this.props.buffer -= dt! * 5;
         if (this.props.buffer <= 0) {
           Wrong();
+          if (this.props.progress < this.props.target) {
+            say("Not fast enough!", true);
+          } else if (this.props.progress > this.props.target) {
+            say("Too much heat!", true);
+          }
           // RESET THE GAME
           this.props = {
             ...this.props,
             ...redLightProps,
+            waitForKeyUp: true,
           };
           if (this.props.osc) this.props.osc.type = "sine";
           this.props.osc.stop();
@@ -81,22 +91,22 @@ export const RedLight = () => {
     },
     onEnter() {
       if (this.update) this.update(0);
-      if (this.props.osc && !this.solved) this.props.osc.start();
     },
     render() {
       if (!this.initialized) return;
       if (this.solved) return;
       const ctx = this.context;
       if (!ctx) return;
+      const outlineColor = hexColorLerp("#e4923f", "#ffffff", this.props.buffer / redLightProps.buffer);
       // Tube
       ctx.save();
-      ctx.fillStyle = this.props.state === "orange" ? "#e4923f" : "#ffffff";
+      ctx.fillStyle = outlineColor;
       ctx.fillRect(340, 50, 40, 210);
       ctx.restore();
 
       // Bulb
       ctx.save();
-      ctx.fillStyle = this.props.state === "orange" ? "#e4923f" : "#ffffff";
+      ctx.fillStyle = outlineColor;
       ctx.beginPath();
       ctx.arc(360, 260, 25, 0, 2 * Math.PI);
       ctx.fill();
@@ -110,7 +120,7 @@ export const RedLight = () => {
       const fillHeight = -2 * this.props.progress;
       ctx.save();
       ctx.fillStyle = "#e43f3f";
-      ctx.fillRect(347, 260, 26, fillHeight);
+      ctx.fillRect(350, 260, 20, fillHeight);
       ctx.restore();
 
       // Target range
