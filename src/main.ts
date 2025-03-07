@@ -21,7 +21,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           <label for="tts">Use browser TTS</label><br>
         </div>
       <div class="logo">
-        <button id="playButton">Play</button>
+        <button id="playButton">Continue</button>
+        <button id="newGameButton">New Game</button>
       </div>
     </div>
     <div class="card" role="application">
@@ -46,7 +47,18 @@ window.addEventListener("DOMContentLoaded", () => {
   //
   const b = document.getElementById("playButton");
   if (!b) return;
+  const gameInProgress = localStorage.getItem("dr-swan-lab-props");
+  if (!gameInProgress) { b.style.display = "none"; }
   b.onclick = () => {
+    document.getElementById("intro")!.style.display = "none";
+    document.getElementById("renderCanvas")!.style.display = "block";
+    initGame();
+  };
+
+  const newGameButton = document.getElementById("newGameButton");
+  if (!newGameButton) return;
+  newGameButton.onclick = () => {
+    localStorage.removeItem("dr-swan-lab-props");
     document.getElementById("intro")!.style.display = "none";
     document.getElementById("renderCanvas")!.style.display = "block";
     initGame();

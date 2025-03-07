@@ -18,17 +18,22 @@ const SpriteFunction = () =>
     color: "red",
     props: {},
     update() {
-      if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
         this.initialized = true;
       }
+      if (this.gameModel.state.animalSolved) {
+        this.props.state = this.props.solution;
+        this.solved = true;
+      }
+      if (this.solved) return;
       this.advance();
     },
     onExit() {},
     onEnter() {},
     onInteract(index) {
+      if (this.solved) return;
       if (index === 0) {
         // Space bar
         say(`${this.props.state.join(", ")}.`, true, true);

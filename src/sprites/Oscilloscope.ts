@@ -21,7 +21,6 @@ const SpriteFunction = () =>
     y: 0,
     props: {},
     update() {
-      if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
@@ -49,6 +48,10 @@ const SpriteFunction = () =>
 
         this.initialized = true;
       }
+      if (this.gameModel.state.cpuSolved) {
+        this.solved = true;
+      }
+      if (this.solved) return;
       this.advance();
     },
     onExit() {

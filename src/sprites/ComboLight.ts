@@ -23,7 +23,6 @@ const SpriteFunction = () =>
     color: "red",
     props: {},
     update() {
-      if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
@@ -38,6 +37,11 @@ const SpriteFunction = () =>
         });
         this.initialized = true;
       }
+      if (this.gameModel.state.comboSolved) {
+        this.props.state = [1, 1, 1, 1, 1];
+        this.solved = true;
+      }
+      if (this.solved) return;
       this.advance();
       const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;
       if (this.roomKey !== roomKey) {
@@ -66,9 +70,11 @@ const SpriteFunction = () =>
     },
     onEnter() {
       if (this.update) this.update();
+      if (this.solved) return;
       this.playCombo();
     },
     onInteract(index) {
+      if (this.solved) return;
       if (index === 0) return;
       let buttonIndex = index - 1;
       if (this.roomKey === "Combo-e") {

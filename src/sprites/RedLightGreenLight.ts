@@ -18,13 +18,16 @@ export const RedLight = () => {
     color: "grey",
     props: {},
     update(dt) {
-      if (this.solved) return;
       if (!this.initialized) {
         this.props = { ...redLightProps };
         this.initialized = true;
         const vol = new Tone.Volume(-25).toDestination();
         this.props.osc = new Tone.Oscillator(440, "sine").connect(vol);
       }
+      if (this.gameModel.state.potionSolved) {
+        this.solved = true;
+      }
+      if (this.solved) return;
       if (this.props.progress > 0) this.props.target += dt! * 8;
       if (
         keyPressed(["1"]) ||
@@ -74,7 +77,7 @@ export const RedLight = () => {
       this.advance();
     },
     onExit() {
-      this.props.osc.stop();
+      if (this.props.osc) this.props.osc.stop();
     },
     onEnter() {
       if (this.update) this.update(0);

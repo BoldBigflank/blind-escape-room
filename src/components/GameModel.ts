@@ -36,7 +36,9 @@ export class GameModel {
     this.moveTo(this.map.rooms[0].name);
     on("activate", (variable: string) => {
       this.state[variable] = true;
+      this.savePropsToLocalStorage();
     });
+    this.loadPropsFromLocalStorage();
   }
 
   public get currentRoom(): Room | undefined {
@@ -81,6 +83,10 @@ export class GameModel {
       this.visitedRooms.push(this.position);
     } else {
       this.inspect();
+    }
+    if (this.currentRoom?.name === "End") {
+      this.shareMessage("You have escaped the lab!", true);
+      this.clearProps();
     }
   }
 
@@ -131,6 +137,31 @@ export class GameModel {
       return;
     }
   }
+  savePropsToLocalStorage() {
+    localStorage.setItem(
+      "dr-swan-lab-props",
+      JSON.stringify({
+        state: this.state,
+        position: this.position,
+        facing: this.facing,
+        puzzle: this.puzzle,
+        visitedRooms: this.visitedRooms,
+      }),
+    );
+  }
+
+  loadPropsFromLocalStorage() {
+    const props = JSON.parse(localStorage.getItem("dr-swan-lab-props") || "{}");
+    if (props.state) this.state = props.state;
+    if (props.position) this.position = props.position;
+    if (props.facing) this.facing = props.facing;
+    if (props.puzzle) this.puzzle = props.puzzle;
+    if (props.visitedRooms) this.visitedRooms = props.visitedRooms;
+  }
+
+  clearProps() {
+    localStorage.removeItem("dr-swan-lab-props");
+  }
 
   action(command: string) {
     const [action, param] = command.split("_");
@@ -142,10 +173,7 @@ export class GameModel {
       case "activate":
         Blip();
         this.state[param] = true;
-        break;
-      case "toggle":
-        Blip();
-        this.state[param] = !this.state[param];
+        this.savePropsToLocalStorage();
         break;
       case "puzzle":
         // Let the puzzle handle the action

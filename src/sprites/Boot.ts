@@ -34,8 +34,6 @@ const SpriteFunction = () =>
     color: "red",
     props: {},
     update(dt) {
-      if (this.solved) return;
-      if (!this.gameModel.state.animalSolved) return;
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
@@ -46,6 +44,11 @@ const SpriteFunction = () =>
           .connect(vol);
         this.initialized = true;
       }
+      if (this.gameModel.state.bootSolved) {
+        this.solved = true;
+      }
+      if (this.solved) return;
+      if (!this.gameModel.state.animalSolved) return;
       this.advance();
       if (!this.solved && this.props.complete.every((c) => c > 0)) {
         Solved();

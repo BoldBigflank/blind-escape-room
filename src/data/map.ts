@@ -41,7 +41,7 @@ const LaboratoryMap = {
       views: [
         {
           direction: "n" as CompassDirection,
-          description: "A small button on the north wall.",
+          description: "The north wall has a small button.",
           puzzle: "melody",
           image: [
             {
@@ -82,7 +82,7 @@ const LaboratoryMap = {
         },
         {
           direction: "s" as CompassDirection,
-          description: "A small button on the south wall.",
+          description: "The south wall with a small button.",
           puzzle: "melody",
           image: [
             {
@@ -109,7 +109,7 @@ const LaboratoryMap = {
         },
         {
           direction: "w" as CompassDirection,
-          description: "A small button on the west wall.",
+          description: "The west wall has a small button.",
           puzzle: "melody",
           image: [
             {

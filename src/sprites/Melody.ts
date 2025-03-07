@@ -17,11 +17,6 @@ const SpriteFunction = () =>
     color: "red",
     props: {},
     update() {
-      const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;
-      if (this.roomKey !== roomKey) {
-        this.roomKey = roomKey;
-      }
-      if (this.solved) return;
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
@@ -31,6 +26,14 @@ const SpriteFunction = () =>
           .connect(vol);
         this.initialized = true;
       }
+      const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;
+      if (this.roomKey !== roomKey) {
+        this.roomKey = roomKey;
+      }
+      if (this.gameModel.state.melodySolved) {
+        this.solved = true;
+      }
+      if (this.solved) return;
       this.advance();
       if (!this.solved && this.props.progress === this.props.state.length) {
         Solved();
