@@ -3,6 +3,7 @@
 import * as Tone from "tone";
 import { emit, Sprite } from "kontra";
 import { Buzz, Solved } from "../data/sfx";
+import { getSharedSynth } from "../data/utils";
 
 const spriteProps = {
   state: [2, 0, 1, 0, 2],
@@ -20,10 +21,7 @@ const SpriteFunction = () =>
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
-        const vol = new Tone.Volume(-25).toDestination();
-        this.props.synth = new Tone.PolySynth(Tone.Synth)
-          .toDestination()
-          .connect(vol);
+        this.props.synth = getSharedSynth();
         this.initialized = true;
       }
       const roomKey = `${this.gameModel.position}-${this.gameModel.facing}`;

@@ -2,7 +2,7 @@
 // hitting buttons changes the pitch, wave type, and volume
 import { emit, Sprite } from "kontra";
 import { Solved } from "../data/sfx";
-import * as Tone from "tone";
+import { createOscillator } from "../data/utils";
 
 const spriteProps = {
   solution: ["F4", "triangle", -6],
@@ -24,11 +24,10 @@ const SpriteFunction = () =>
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
-        const vol = new Tone.Volume(-25).toDestination();
-        this.props.oscSolution = new Tone.Oscillator(
+        this.props.oscSolution = createOscillator(
           this.props.solution[0],
           this.props.solution[1],
-        ).connect(vol);
+        );
         this.props.oscSolution
           .set({
             frequency: this.props.solution[0],
@@ -37,7 +36,7 @@ const SpriteFunction = () =>
           })
           .start(0, 0)
           .stop("+1");
-        this.props.osc = new Tone.Oscillator(440, "sine").connect(vol);
+        this.props.osc = createOscillator(440, "sine");
         this.props.osc
           .set({
             frequency: this.props.state[0],

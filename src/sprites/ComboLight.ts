@@ -1,6 +1,7 @@
 import * as Tone from "tone";
 import { Sprite, emit } from "kontra";
 import { Solved } from "../data/sfx";
+import { getSharedSynth } from "../data/utils";
 
 const spriteProps = {
   state: [1, 1, 1, 1, 1],
@@ -26,12 +27,7 @@ const SpriteFunction = () =>
       if (!this.initialized) {
         // Set up the sounds
         this.props = { ...spriteProps };
-
-        const vol = new Tone.Volume(-25).toDestination();
-        this.props.synth = new Tone.PolySynth(Tone.Synth)
-          .toDestination()
-          .connect(vol);
-
+        this.props.synth = getSharedSynth();
         [0, 2, 4].forEach((index) => {
           this.hitButton(index);
         });

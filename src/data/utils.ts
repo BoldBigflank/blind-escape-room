@@ -1,4 +1,27 @@
 import { getStoreItem } from "kontra";
+import * as Tone from "tone";
+
+// Create a standard volume for all synths
+const standardVolume = new Tone.Volume(-25).toDestination();
+
+// Get or create a shared PolySynth
+let sharedSynth: Tone.PolySynth | null = null;
+
+export const getSharedSynth = () => {
+  if (!sharedSynth) {
+    sharedSynth = new Tone.PolySynth(Tone.Synth)
+      .toDestination()
+      .connect(standardVolume);
+  }
+  return sharedSynth;
+};
+
+export const createOscillator = (
+  frequency: number | string = 440,
+  type: Tone.ToneOscillatorType = "sine",
+) => {
+  return new Tone.Oscillator(frequency, type).connect(standardVolume);
+};
 
 export const say = (text: string | undefined, interrupting?: boolean) => {
   if (!text) return;

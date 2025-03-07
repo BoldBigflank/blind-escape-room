@@ -1,7 +1,6 @@
 import { keyPressed, Sprite, emit, clamp, gamepadPressed } from "kontra";
-import * as Tone from "tone";
 import { Solved, Wrong, toneLerp } from "../data/sfx";
-import { hexColorLerp, say } from "../data/utils";
+import { hexColorLerp, say, createOscillator } from "../data/utils";
 
 const redLightProps = {
   state: "white", // orange, red, green
@@ -23,8 +22,7 @@ export const RedLight = () => {
       if (!this.initialized) {
         this.props = { ...redLightProps };
         this.initialized = true;
-        const vol = new Tone.Volume(-25).toDestination();
-        this.props.osc = new Tone.Oscillator(440, "sine").connect(vol);
+        this.props.osc = createOscillator(440, "sine");
       }
       if (this.gameModel.state.potionSolved) {
         this.solved = true;
