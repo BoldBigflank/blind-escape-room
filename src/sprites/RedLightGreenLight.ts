@@ -32,12 +32,12 @@ export const RedLight = () => {
       if (this.solved) return;
       if (this.props.progress > 0) this.props.target += dt! * 8;
       this.props.ignoreInput = Math.max(0, this.props.ignoreInput - dt!);
-      if (!this.props.ignoreInput && (
-          keyPressed(["1"]) ||
+      if (
+        !this.props.ignoreInput &&
+        (keyPressed(["1"]) ||
           gamepadPressed("north") ||
           gamepadPressed("west") ||
-          gamepadPressed("east")
-        )
+          gamepadPressed("east"))
       ) {
         this.props.osc.start();
         this.props.progress += dt! * 12;
@@ -97,7 +97,11 @@ export const RedLight = () => {
       if (this.solved) return;
       const ctx = this.context;
       if (!ctx) return;
-      const outlineColor = hexColorLerp("#e4923f", "#ffffff", this.props.buffer / redLightProps.buffer);
+      const outlineColor = hexColorLerp(
+        "#e4923f",
+        "#ffffff",
+        this.props.buffer / redLightProps.buffer,
+      );
       // Tube
       ctx.save();
       ctx.fillStyle = outlineColor;

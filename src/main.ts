@@ -48,7 +48,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const b = document.getElementById("playButton");
   if (!b) return;
   const gameInProgress = localStorage.getItem("dr-swan-lab-props");
-  if (!gameInProgress) { b.style.display = "none"; }
+  if (!gameInProgress) {
+    b.style.display = "none";
+  }
   b.onclick = () => {
     document.getElementById("intro")!.style.display = "none";
     document.getElementById("renderCanvas")!.style.display = "block";

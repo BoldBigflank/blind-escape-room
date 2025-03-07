@@ -8,7 +8,7 @@ import {
 } from "../data/map.ts";
 import { Blip } from "../data/sfx.ts";
 import { say } from "../data/utils.ts";
-import { getStoreItem, on } from "kontra";
+import { on } from "kontra";
 
 export class GameModel {
   map: Map;

@@ -256,7 +256,7 @@ export const MapSprite = (gameModel: GameModel) => {
       if (gameModel.message !== undefined) {
         ctx.fillStyle = "white";
         ctx.textBaseline = "top";
-        
+
         const maxWidth = 620; // Available width for text
         const maxHeight = 60; // Available height for text
         const words = gameModel.message.split(" ");
@@ -288,7 +288,7 @@ export const MapSprite = (gameModel: GameModel) => {
         // Set font size based on number of lines
         let fontSize = 20; // Default size
         ctx.font = `${fontSize}px monospace`;
-        
+
         // Check if single line fits at default size
         if (lines.length === 1) {
           const width = ctx.measureText(lines[0]).width;
@@ -299,14 +299,14 @@ export const MapSprite = (gameModel: GameModel) => {
             lines[1] = words.slice(midPoint).join(" ");
           }
         }
-        
+
         // Scale down if we have two lines
         if (lines.length > 1) {
           // Find the widest line
-          const maxLineWidth = Math.max(...lines.map(line => 
-            ctx.measureText(line).width
-          ));
-          
+          const maxLineWidth = Math.max(
+            ...lines.map((line) => ctx.measureText(line).width),
+          );
+
           // Calculate font size ratio to fit width
           if (maxLineWidth > maxWidth) {
             fontSize = Math.floor(fontSize * (maxWidth / maxLineWidth));
@@ -320,7 +320,7 @@ export const MapSprite = (gameModel: GameModel) => {
 
         // Render all lines
         lines.forEach((line, index) => {
-          ctx.fillText(line, 10, 410 + (index * (maxHeight/lines.length)));
+          ctx.fillText(line, 10, 410 + index * (maxHeight / lines.length));
         });
       }
       ctx.restore();

@@ -1,9 +1,6 @@
 import { getStoreItem } from "kontra";
 
-export const say = (
-  text: string | undefined,
-  interrupting?: boolean,
-) => {
+export const say = (text: string | undefined, interrupting?: boolean) => {
   if (!text) return;
   const tts = getStoreItem("dr-swan-lab-tts") === 1;
   // Use browser TTS
@@ -33,5 +30,5 @@ export const hexColorLerp = (color1: string, color2: string, t: number) => {
   const r2 = parseInt(color2.slice(1, 3), 16);
   const g2 = parseInt(color2.slice(3, 5), 16);
   const b2 = parseInt(color2.slice(5, 7), 16);
-  return `#${((r1 + (r2 - r1) * t) << 16 | (g1 + (g2 - g1) * t) << 8 | (b1 + (b2 - b1) * t)).toString(16).padStart(6, "0")}`;
+  return `#${(((r1 + (r2 - r1) * t) << 16) | ((g1 + (g2 - g1) * t) << 8) | (b1 + (b2 - b1) * t)).toString(16).padStart(6, "0")}`;
 };
