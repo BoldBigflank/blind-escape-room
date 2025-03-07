@@ -1,1 +1,1 @@
-tsc-files --noEmit
+lint-staged
