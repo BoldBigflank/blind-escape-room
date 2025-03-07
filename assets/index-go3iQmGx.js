@@ -239,7 +239,7 @@ var wo=Object.defineProperty;var To=(s,t,e)=>t in s?wo(s,t,{enumerable:!0,config
     <div class="card" role="application">
       <canvas id="renderCanvas" style="display:none;" width=640 height=480 tabindex=0></canvas>
     </div>
-    <div role="region" id="gameLog" class="visually-hidden" aria-live="assertive" aria-atomic="true" aria-relevant="additions">
+    <div role="region" id="gameLog" class="visually-hidden" aria-live="assertive" aria-atomic="false" aria-relevant="additions">
     </div>
   </div>
 `;window.addEventListener("DOMContentLoaded",()=>{const s="dr-swan-lab-tts",t=er(s),e=document.getElementById("tts");e&&(t&&(e.checked=!0),e.onclick=()=>{So(s,e.checked?1:0)});const n=document.getElementById("playButton");if(!n)return;localStorage.getItem("dr-swan-lab-props")||(n.style.display="none"),n.onclick=()=>{document.getElementById("intro").style.display="none",document.getElementById("renderCanvas").style.display="block",tr()};const r=document.getElementById("newGameButton");r&&(r.onclick=()=>{localStorage.removeItem("dr-swan-lab-props"),document.getElementById("intro").style.display="none",document.getElementById("renderCanvas").style.display="block",tr()})});
