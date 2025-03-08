@@ -28,8 +28,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <div class="card" role="application">
       <canvas id="renderCanvas" style="display:none;" width=640 height=480 tabindex=0></canvas>
     </div>
-    <div role="region" id="gameLog" class="visually-hidden" aria-live="assertive" aria-atomic="false" aria-relevant="additions">
-    </div>
+    <div role="region" id="gameLog" class="visually-hidden"></div>
+    <div role="region" id="gameAnnounce" class="visually-hidden" aria-live="assertive" aria-atomic="false" aria-relevant="additions"></div>
   </div>
 `;
 

@@ -34,15 +34,20 @@ export const say = (text: string | undefined, interrupting?: boolean) => {
     window.speechSynthesis.speak(msg);
   }
 
-  // Allow the user's screen reader
-  const log = document.getElementById("gameLog");
-  if (!log) return;
   let div = document.createElement("div");
   div.textContent = text;
-  log.append(div);
-  // Tidy the div
-  while (log.childNodes.length > 5 && log.firstChild) {
-    log.removeChild(log.firstChild);
+
+  const gameAnnounce = document.getElementById("gameAnnounce");
+  if (gameAnnounce) {
+    while (gameAnnounce.firstChild) {
+      gameAnnounce.removeChild(gameAnnounce.firstChild);
+    }
+    gameAnnounce.appendChild(div.cloneNode(true));
+  }
+
+  const gameLog = document.getElementById("gameLog");
+  if (gameLog) {
+    gameLog.appendChild(div.cloneNode(true));
   }
 };
 
