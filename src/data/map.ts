@@ -148,7 +148,11 @@ const LaboratoryMap = {
           puzzle: "melody",
           image: [
             {
+              condition: "potionSolved",
               path: "melody-door",
+            },
+            {
+              path: "melody-door-blank",
             },
           ],
           interaction: [
